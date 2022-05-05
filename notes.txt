@@ -1,0 +1,7 @@
+Ideen zur Visualisierung/Testen:
+
+- 3D Polygone werden aus CSV / XML geladen
+- Bild wird durch BSP Tree gerendert und als PNG abgespeichert
+
+
+https://www.youtube.com/watch?v=NbqHUvCE4_0
