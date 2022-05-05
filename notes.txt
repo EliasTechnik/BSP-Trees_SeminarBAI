@@ -5,3 +5,7 @@ Ideen zur Visualisierung/Testen:
 
 
 https://www.youtube.com/watch?v=NbqHUvCE4_0
+
+Wofür wird es gebraucht:
+    - effizientes Rendern
+    - Kollisionserkennung zwischen komplexen (runden) Objekten
