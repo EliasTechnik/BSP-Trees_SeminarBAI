@@ -1,1 +1,2 @@
 I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\x64\Debug\BSPTree_draft3.exe
+C:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\x64\Debug\BSPTree_draft3.exe
