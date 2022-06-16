@@ -7,5 +7,5 @@ private:
 	Location origin;
 	dList<Location> saddlepoints;
 public:
-	cPlane(Location _origin, dlist<Location> _saddlepoints);
+	//cPlane(Location _origin, dlist<Location> _saddlepoints);
 };

@@ -20,7 +20,7 @@ int main()
         std::cout << i << ": " << number << std::endl;
     }
 
-
+   //QuadTreeNode<char> qtn = new QuadTreeNode<char>()
 
 
 

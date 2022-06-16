@@ -18,7 +18,7 @@
     <ClCompile Include="BSPTree_draft3.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="QuadElement.cpp">
+    <ClCompile Include="cLocation.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
@@ -29,13 +29,13 @@
     <ClInclude Include="dList.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="QuadElement.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="cLocation.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="cPlane.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadTreeNode.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

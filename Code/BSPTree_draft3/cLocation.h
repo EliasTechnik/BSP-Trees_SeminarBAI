@@ -1,31 +1,13 @@
 #pragma once
 
-class d {//Parent of all dimensions
-private:
+struct point2d { //2D point
 	double x;
-public:
-	d(double _x) {
-		x = _x;
-	}
-	bool isInfront(plane p);
-	bool isBehind(plane p) {
-		return !this->isInfront(p);
-	}
+	double y;
 };
 
-class plane {
-	d origin;
-	d 
+struct square2d {
+	point2d leftUpperCorner;
+	point2d rightBottomCorner;
 };
 
 
-
-class d1{
-private:
-	double x;
-public:
-	d1(double _x) {
-
-	}
-	
-}

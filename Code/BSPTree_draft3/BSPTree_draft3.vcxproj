@@ -128,13 +128,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BSPTree_draft3.cpp" />
-    <ClCompile Include="QuadElement.cpp" />
+    <ClCompile Include="cLocation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cLocation.h" />
     <ClInclude Include="cPlane.h" />
     <ClInclude Include="dList.h" />
-    <ClInclude Include="QuadElement.h" />
+    <ClInclude Include="QuadTreeNode.h" />
     <ClInclude Include="TreeNode.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

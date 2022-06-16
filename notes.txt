@@ -12,3 +12,8 @@ Wofür wird es gebraucht:
 
 
 https://www.youtube.com/watch?v=OJxEcs0w_kE ....Quadtree
+
+
+Important:
+
+https://www.cs.cmu.edu/afs/andrew/scs/cs/15-463/2001/pub/www/notes/bsp.html
