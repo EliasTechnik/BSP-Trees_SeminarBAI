@@ -15,6 +15,13 @@ public:
 	Location getLocation() { return NodeLocation; };
 	dList<Payload> * getPayload() { return payload; };
 	bool isLeaf() { return NodeIsLeaf; };
+	//BSPTreeNodeDivision<BSPTreeNode> divide()
+};
+
+template <class Nodetype,int dimension>
+struct BSPTreeNodeDivisionResult { //returned by the devision function
+	Nodetype nodes;
+	int d = dimension;
 };
 
 template <class Payload, class Location, int dimension>
