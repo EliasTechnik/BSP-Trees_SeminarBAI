@@ -5,14 +5,15 @@ unit unit_quadtree;
 interface
 
 uses
-  Classes, SysUtils, graphics;
+  Classes, SysUtils, graphics, BGRABitmap, BGRABitmapTypes, math;
 
 type
 
 { tdot }
 
 tdot=record
-  color:tcolor;
+  fillcolor:tcolor;
+  outline:tcolor;
   diameter:integer;
 end;
 
@@ -43,6 +44,8 @@ type
    constructor create(l:t2d; a:tdot);
    property plocation:t2d read get_location write set_location;
    property pattr:tdot read get_attr  write set_attr;
+   procedure paint(c:tcanvas);
+   procedure paint(bm:tBGRABitmap;scalefactor:integer);
 end;
 
 type
@@ -78,7 +81,13 @@ type
    property pDim:tsquare read get_dim;
    property pMaxitems:integer read get_maxitems;
    procedure paintBorder(c:tcanvas);
+   procedure paintBorder(bm:tbgrabitmap; scalefactor:integer);
+   procedure paintGraph(bm: TBGRAbitmap; level: integer; xWidth: integer; xPos:integer;csize:integer; vspace:integer; hspace:integer);
+   //                   canvas      vertlevel       colwidth         colnr        size of circle  vertical spacer  horizontalspacer
    function get_depth(cd:integer):integer;
+   procedure paintDots(c:tcanvas);
+   procedure paintDots(bm:tBGRABitmap;scalefactor:integer);
+   function TreeCount(known:integer):integer;
 end;
 
 
@@ -201,6 +210,46 @@ begin
   end;
 end;
 
+procedure tTreeNode.paintBorder(bm: tbgrabitmap; scalefactor:integer);
+begin
+  bm.canvas.Pen.Color:=rgbtocolor(0,0,200);
+  bm.canvas.Pen.Style:=pssolid;
+  bm.canvas.Brush.Style:=bsclear;
+  bm.canvas.Pen.Width:=1*scalefactor;
+  bm.canvas.Rectangle((dim.center.x-round(dim.width/2))*scalefactor,(dim.center.y-round(dim.height/2))*scalefactor,(dim.center.x+round(dim.width/2))*scalefactor,(dim.center.y+round(dim.height/2))*scalefactor);
+
+  if not isleaf then begin
+    northwest.paintBorder(bm,scalefactor);
+    southwest.paintBorder(bm,scalefactor);
+    northeast.paintBorder(bm,scalefactor);
+    southeast.paintBorder(bm,scalefactor);
+  end;
+end;
+
+procedure tTreeNode.paintGraph(bm: TBGRAbitmap; level: integer;
+  xWidth: integer; xPos: integer; csize: integer; vspace: integer;
+  hspace: integer);
+var x,y:integer;
+    nextpos:integer;
+begin
+  //paint self
+  y:=round(csize/2)+level*(csize+hspace);
+  x:=xPos*round(bm.canvas.Width/(power(4,level)+1));
+
+  nextpos:=round(power(4,level+1)-(xPos*4));
+
+
+  bm.Canvas.Ellipse(x-round(csize/2),y-round(csize/2),x+round(csize/2),y+round(csize/2));
+  if not isleaf then begin
+     northwest.paintGraph(bm,level+1,xWidth,nextpos,csize,vspace,hspace);
+     southwest.paintGraph(bm,level+1,xWidth,nextpos+1,csize,vspace,hspace);
+     southeast.paintGraph(bm,level+1,xWidth,nextpos+2,csize,vspace,hspace);
+     northeast.paintGraph(bm,level+1,xWidth,nextpos+3,csize,vspace,hspace);
+     //paint conecting lines
+
+  end;
+end;
+
 function tTreeNode.get_depth(cd: integer): integer;
 var depth:integer;
 begin
@@ -215,6 +264,56 @@ begin
     depth:=southeast.get_depth(cd+1);
     if depth>result then result:=depth;
   end;
+end;
+
+procedure tTreeNode.paintDots(c: tcanvas);
+var i:integer;
+begin
+  if isleaf then begin
+    if items.count>0 then begin
+      for i:=0 to items.count-1 do begin
+        tsmartdot(items.items[i]).paint(c);
+      end;
+    end;
+  end
+  else begin
+    northwest.paintDots(c);
+    southwest.paintDots(c);
+    northeast.paintDots(c);
+    southeast.paintDots(c);
+  end;
+end;
+
+procedure tTreeNode.paintDots(bm: tBGRABitmap; scalefactor: integer);
+  var i:integer;
+begin
+  if isleaf then begin
+    if items.count>0 then begin
+      for i:=0 to items.count-1 do begin
+        tsmartdot(items.items[i]).paint(bm,scalefactor);
+      end;
+    end;
+  end
+  else begin
+    northwest.paintDots(bm,scalefactor);
+    southwest.paintDots(bm,scalefactor);
+    northeast.paintDots(bm,scalefactor);
+    southeast.paintDots(bm,scalefactor);
+  end;
+end;
+
+function tTreeNode.TreeCount(known: integer): integer;
+begin
+  if isleaf then begin
+    known:=known+items.count;
+  end
+  else begin
+      known:=northwest.TreeCount(known);
+      known:=northeast.TreeCount(known);
+      known:=southeast.TreeCount(known);
+      known:=southwest.TreeCount(known);
+  end;
+  result:=known;
 end;
 
 { tsmartdot }
@@ -243,6 +342,27 @@ constructor tsmartdot.create(l: t2d; a: tdot);
 begin
  location:=l;
  attr:=a;
+end;
+
+procedure tsmartdot.paint(c: tcanvas);
+begin
+  c.Pen.color:=attr.outline;
+  c.Pen.Style:=pssolid;
+  c.Pen.Width:=1;
+  c.Brush.Color:=attr.fillcolor;
+  c.brush.style:=bssolid;
+  c.Ellipse(location.x-round(attr.diameter/2),location.y-round(attr.diameter/2),location.x+round(attr.diameter/2),location.y+round(attr.diameter/2));
+
+end;
+
+procedure tsmartdot.paint(bm: tBGRABitmap; scalefactor: integer);
+begin
+  bm.canvas.Pen.color:=attr.outline;
+  bm.canvas.Pen.Style:=pssolid;
+  bm.Pen.Width:=1*scalefactor;
+  bm.canvas.Brush.Color:=attr.fillcolor;
+  bm.canvas.brush.style:=bssolid;
+  bm.canvas.Ellipse((location.x-round(attr.diameter/2))*scalefactor,(location.y-round(attr.diameter/2))*scalefactor,(location.x+round(attr.diameter/2))*scalefactor,(location.y+round(attr.diameter/2))*scalefactor);
 end;
 
 end.

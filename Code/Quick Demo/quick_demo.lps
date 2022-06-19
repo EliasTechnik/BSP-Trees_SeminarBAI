@@ -12,27 +12,28 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="26"/>
       </Unit>
       <Unit>
         <Filename Value="unitmain.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="formmain"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <TopLine Value="186"/>
-        <CursorPos X="40" Y="213"/>
-        <UsageCount Value="20"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="64"/>
+        <CursorPos X="22" Y="86"/>
+        <UsageCount Value="26"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="unit_quadtree.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="186"/>
-        <CursorPos X="26" Y="205"/>
-        <UsageCount Value="20"/>
+        <TopLine Value="334"/>
+        <CursorPos X="22" Y="362"/>
+        <UsageCount Value="26"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -40,130 +41,130 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="2"/>
         <CursorPos X="21" Y="2"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="26"/>
         <Loaded Value="True"/>
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
       <Position>
-        <Filename Value="unit_quadtree.pas"/>
-        <Caret Line="56" Column="12" TopLine="41"/>
-      </Position>
-      <Position>
-        <Filename Value="unit_quadtree.pas"/>
-        <Caret Line="67" Column="36" TopLine="42"/>
-      </Position>
-      <Position>
-        <Filename Value="unit_quadtree.pas"/>
-        <Caret Line="76" Column="39" TopLine="43"/>
+        <Filename Value="unitmain.pas"/>
+        <Caret Line="9" Column="61"/>
       </Position>
       <Position>
         <Filename Value="unitmain.pas"/>
-        <Caret Line="154" Column="37" TopLine="135"/>
+        <Caret Line="136" Column="42" TopLine="122"/>
       </Position>
       <Position>
         <Filename Value="unitmain.pas"/>
-        <Caret Line="47" Column="10" TopLine="19"/>
+        <Caret Line="137" Column="42" TopLine="123"/>
       </Position>
       <Position>
         <Filename Value="unit_quadtree.pas"/>
-        <Caret Line="112" Column="7" TopLine="92"/>
+        <Caret Line="46" Column="30" TopLine="19"/>
       </Position>
       <Position>
         <Filename Value="unit_quadtree.pas"/>
-        <Caret Line="142" Column="20" TopLine="125"/>
+        <Caret Line="85" Column="18" TopLine="57"/>
+      </Position>
+      <Position>
+        <Filename Value="unitmain.pas"/>
+        <Caret Line="61" Column="25" TopLine="41"/>
+      </Position>
+      <Position>
+        <Filename Value="unitmain.pas"/>
+        <Caret Line="238" Column="17" TopLine="207"/>
+      </Position>
+      <Position>
+        <Filename Value="unitmain.pas"/>
+        <Caret Line="240" Column="29" TopLine="146"/>
       </Position>
       <Position>
         <Filename Value="unit_quadtree.pas"/>
-        <Caret Line="190" Column="6" TopLine="160"/>
+        <Caret Line="86" Column="44" TopLine="65"/>
       </Position>
       <Position>
         <Filename Value="unitmain.pas"/>
-        <Caret Line="167" Column="15" TopLine="136"/>
+        <Caret Line="220" Column="23" TopLine="203"/>
       </Position>
       <Position>
         <Filename Value="unit_quadtree.pas"/>
-        <Caret Line="64" Column="23" TopLine="49"/>
-      </Position>
-      <Position>
-        <Filename Value="unitmain.pas"/>
-        <Caret Line="52" Column="25" TopLine="30"/>
+        <Caret Line="87" Column="27" TopLine="56"/>
       </Position>
       <Position>
         <Filename Value="unit_quadtree.pas"/>
-        <Caret Line="78" Column="23" TopLine="56"/>
-      </Position>
-      <Position>
-        <Filename Value="unitmain.pas"/>
-        <Caret Line="136" Column="13" TopLine="106"/>
+        <Caret Line="47" Column="16" TopLine="36"/>
       </Position>
       <Position>
         <Filename Value="unit_quadtree.pas"/>
-        <Caret Line="184" Column="149" TopLine="166"/>
+        <Caret Line="83" Column="34" TopLine="69"/>
       </Position>
       <Position>
         <Filename Value="unitmain.pas"/>
-        <Caret Line="183" Column="23" TopLine="153"/>
+        <Caret Line="218" Column="5" TopLine="199"/>
+      </Position>
+      <Position>
+        <Filename Value="unitmain.pas"/>
+        <Caret Line="217" Column="5" TopLine="198"/>
+      </Position>
+      <Position>
+        <Filename Value="unitmain.pas"/>
+        <Caret Line="59" Column="27" TopLine="43"/>
+      </Position>
+      <Position>
+        <Filename Value="unitmain.pas"/>
+        <Caret Line="150" TopLine="135"/>
+      </Position>
+      <Position>
+        <Filename Value="unitmain.pas"/>
+        <Caret Line="45" TopLine="28"/>
       </Position>
       <Position>
         <Filename Value="unit_quadtree.pas"/>
-        <Caret Line="185" Column="5" TopLine="166"/>
+        <Caret Line="47" Column="40" TopLine="16"/>
       </Position>
       <Position>
         <Filename Value="unit_quadtree.pas"/>
-        <Caret Line="165" Column="8" TopLine="157"/>
+        <Caret Line="362" Column="212" TopLine="331"/>
       </Position>
       <Position>
         <Filename Value="unit_quadtree.pas"/>
-        <Caret Line="164" Column="39" TopLine="146"/>
-      </Position>
-      <Position>
-        <Filename Value="unitmain.pas"/>
-        <Caret Line="132" Column="36" TopLine="114"/>
-      </Position>
-      <Position>
-        <Filename Value="unitmain.pas"/>
-        <Caret Line="67" Column="17" TopLine="48"/>
-      </Position>
-      <Position>
-        <Filename Value="unitmain.pas"/>
-        <Caret Line="68" Column="17" TopLine="49"/>
-      </Position>
-      <Position>
-        <Filename Value="unitmain.pas"/>
-        <Caret Line="69" Column="17" TopLine="50"/>
-      </Position>
-      <Position>
-        <Filename Value="unitmain.pas"/>
-        <Caret Line="71" Column="17" TopLine="52"/>
-      </Position>
-      <Position>
-        <Filename Value="unitmain.pas"/>
-        <Caret Line="137" Column="3" TopLine="135"/>
+        <Caret Line="83" Column="41" TopLine="72"/>
       </Position>
       <Position>
         <Filename Value="unit_quadtree.pas"/>
-        <Caret Line="79" Column="31" TopLine="46"/>
-      </Position>
-      <Position>
-        <Filename Value="unitmain.pas"/>
-        <Caret Line="57" Column="27" TopLine="38"/>
-      </Position>
-      <Position>
-        <Filename Value="unitmain.pas"/>
-        <Caret Line="207" Column="9" TopLine="176"/>
+        <Caret Line="361" Column="26" TopLine="334"/>
       </Position>
       <Position>
         <Filename Value="unit_quadtree.pas"/>
-        <Caret Line="79" Column="49" TopLine="52"/>
+        <Caret Line="362" Column="22" TopLine="334"/>
       </Position>
       <Position>
         <Filename Value="unitmain.pas"/>
-        <Caret Line="58" Column="25" TopLine="41"/>
+        <Caret Line="78" Column="36" TopLine="60"/>
       </Position>
       <Position>
-        <Filename Value="unit_quadtree.pas"/>
-        <Caret Line="81" Column="48" TopLine="64"/>
+        <Filename Value="unitmain.pas"/>
+        <Caret Line="79" Column="36" TopLine="61"/>
+      </Position>
+      <Position>
+        <Filename Value="unitmain.pas"/>
+        <Caret Line="80" Column="36" TopLine="62"/>
+      </Position>
+      <Position>
+        <Filename Value="unitmain.pas"/>
+        <Caret Line="82" Column="36" TopLine="64"/>
+      </Position>
+      <Position>
+        <Filename Value="unitmain.pas"/>
+        <Caret Line="110" Column="3" TopLine="108"/>
+      </Position>
+      <Position>
+        <Filename Value="unitmain.pas"/>
+        <Caret Line="127" Column="3" TopLine="109"/>
+      </Position>
+      <Position>
+        <Filename Value="unitmain.pas"/>
+        <Caret Line="67" Column="23" TopLine="50"/>
       </Position>
     </JumpHistory>
     <RunParams>

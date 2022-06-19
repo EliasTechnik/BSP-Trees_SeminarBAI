@@ -1,17 +1,17 @@
 object formmain: Tformmain
-  Left = 993
-  Height = 441
-  Top = 202
+  Left = 2007
+  Height = 425
+  Top = 252
   Width = 555
   Caption = 'Quadtree Demo'
-  ClientHeight = 421
+  ClientHeight = 405
   ClientWidth = 555
   Menu = mm
   OnCreate = FormCreate
   LCLVersion = '2.2.2.0'
   object parea: TPaintBox
     Left = 0
-    Height = 398
+    Height = 382
     Top = 0
     Width = 555
     Align = alClient
@@ -22,7 +22,7 @@ object formmain: Tformmain
   object sb: TStatusBar
     Left = 0
     Height = 23
-    Top = 398
+    Top = 382
     Width = 555
     Panels = <    
       item
@@ -42,10 +42,6 @@ object formmain: Tformmain
       object mi_save_picture: TMenuItem
         Caption = 'Save Picture'
         OnClick = mi_save_pictureClick
-      end
-      object save_graph: TMenuItem
-        Caption = 'Save Graph'
-        OnClick = save_graphClick
       end
     end
     object mi_tool: TMenuItem
@@ -81,6 +77,30 @@ object formmain: Tformmain
         Caption = 'Random Group'
         RadioItem = True
         OnClick = mi_groupClick
+      end
+    end
+    object mi_view: TMenuItem
+      Caption = 'View'
+      object mi_show_tree: TMenuItem
+        Caption = 'show tree'
+        Checked = True
+        OnClick = mi_show_treeClick
+      end
+      object mi_fhd_169: TMenuItem
+        Caption = 'FHD 16:9'
+        RadioItem = True
+        OnClick = mi_fhd_169Click
+      end
+      object mi_hd_169: TMenuItem
+        Caption = 'HD 16:9'
+        RadioItem = True
+        OnClick = mi_hd_169Click
+      end
+      object mi_hd_11: TMenuItem
+        Caption = 'HD 1:1'
+        Checked = True
+        RadioItem = True
+        OnClick = mi_hd_11Click
       end
     end
   end

@@ -6,16 +6,20 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, Menus, ExtCtrls,
-  ComCtrls, unit_quadtree;
+  ComCtrls, unit_quadtree, BGRABitmap, BGRABitmapTypes, math;
 
 type
 
   { Tformmain }
 
   Tformmain = class(TForm)
+    mi_fhd_169: TMenuItem;
+    mi_hd_169: TMenuItem;
+    mi_hd_11: TMenuItem;
+    mi_view: TMenuItem;
+    mi_show_tree: TMenuItem;
     mi_file: TMenuItem;
     mi_save_picture: TMenuItem;
-    save_graph: TMenuItem;
     mi_mode: TMenuItem;
     mi_single: TMenuItem;
     mi_group: TMenuItem;
@@ -31,8 +35,12 @@ type
     procedure mi_activate_brushClick(Sender: TObject);
     procedure mi_activate_penClick(Sender: TObject);
     procedure mi_clearClick(Sender: TObject);
+    procedure mi_fhd_169Click(Sender: TObject);
     procedure mi_groupClick(Sender: TObject);
+    procedure mi_hd_11Click(Sender: TObject);
+    procedure mi_hd_169Click(Sender: TObject);
     procedure mi_save_pictureClick(Sender: TObject);
+    procedure mi_show_treeClick(Sender: TObject);
     procedure mi_singleClick(Sender: TObject);
     procedure pareaMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
@@ -40,7 +48,6 @@ type
       );
     procedure pareaMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
-    procedure save_graphClick(Sender: TObject);
   private
 
   public
@@ -49,12 +56,15 @@ type
     doPaint:boolean;
     def_dot:tdot;
     t:ttreenode;
+    maxItems:integer;
     procedure paint_dot(d:tdot; x:integer; y:integer);
     procedure paint_dot_group(d:tdot;count:integer;spread_factor:double;x:integer; y:integer);
     procedure paint;
     procedure clear;
     procedure paintTree;
     procedure updateStats;
+    procedure updateviz(full:boolean =false);
+    procedure rescale;
   end;
 
 var
@@ -71,11 +81,13 @@ implementation
 procedure Tformmain.FormCreate(Sender: TObject);
 begin
  doPaint:=false;
- def_dot.color:=rgbtocolor(200,0,0);
+ def_dot.fillcolor:=rgbtocolor(200,0,0);
+ def_dot.outline:=rgbtocolor(0,0,0);
  def_dot.diameter:=8;
- clear;
+ maxitems:=4;
  parea.Canvas.AntialiasingMode:=amOn;
  randomize();
+ rescale;
 end;
 
 procedure Tformmain.mi_activate_brushClick(Sender: TObject);
@@ -95,15 +107,56 @@ begin
   clear;
 end;
 
+procedure Tformmain.mi_fhd_169Click(Sender: TObject);
+begin
+  mi_fhd_169.checked:= not mi_fhd_169.checked;
+  if mi_fhd_169.checked then begin
+     mi_hd_169.checked:=false;
+     mi_hd_11.checked:=false;
+  end;
+  rescale;
+end;
+
 procedure Tformmain.mi_groupClick(Sender: TObject);
 begin
   mi_group.Checked:=not mi_group.Checked;
   if mi_single.checked then mi_single.Checked:=false;
 end;
 
-procedure Tformmain.mi_save_pictureClick(Sender: TObject);
+procedure Tformmain.mi_hd_11Click(Sender: TObject);
 begin
+  mi_hd_11.checked:= not mi_hd_11.checked;
+  if mi_hd_11.checked then begin
+     mi_hd_169.checked:=false;
+     mi_fhd_169.checked:=false;
+  end;
+  rescale;
+end;
 
+procedure Tformmain.mi_hd_169Click(Sender: TObject);
+begin
+  mi_hd_169.checked:= not mi_hd_169.checked;
+  if mi_hd_169.checked then begin
+     mi_hd_11.checked:=false;
+     mi_fhd_169.checked:=false;
+  end;
+  rescale;
+end;
+
+procedure Tformmain.mi_save_pictureClick(Sender: TObject);
+var bm:tbgrabitmap;
+   x,y:integer;
+begin
+  bm:=tbgrabitmap.Create(parea.Width*10,parea.Height*10);
+  t.paintDots(bm,10);
+  if mi_show_tree.checked then t.paintBorder(bm,10);
+  bm.SaveToFile('picture_out.png');
+end;
+
+procedure Tformmain.mi_show_treeClick(Sender: TObject);
+begin
+  mi_show_tree.checked := not mi_show_tree.checked;
+  updateviz(true);
 end;
 
 procedure Tformmain.mi_singleClick(Sender: TObject);
@@ -133,25 +186,15 @@ begin
    doPaint:=false;
 end;
 
-procedure Tformmain.save_graphClick(Sender: TObject);
-begin
-
-end;
-
 procedure Tformmain.paint_dot(d: tdot; x:integer; y:integer);
 var sd:tsmartdot;
     l:t2d;
 begin
-  parea.Canvas.Pen.color:=d.color;
-  parea.Canvas.Pen.Style:=pssolid;
-  parea.canvas.Brush.Color:=d.color;
-  parea.canvas.brush.style:=bssolid;
-  parea.canvas.Ellipse(x-round(d.diameter/2),y-round(d.diameter/2),x+round(d.diameter/2),y+round(d.diameter/2));
   l.x:=x;
   l.y:=y;
   sd:=tsmartdot.create(l,d);
   t.addItem(sd);
-  paintTree;
+  updateViz;
   updateStats;
 end;
 
@@ -190,11 +233,8 @@ begin
   d.center.y:=round(parea.Height/2);
   d.center.x:=round(parea.Width/2);
   if assigned(t) then t.Free;
-  t:=ttreenode.create(nil,d,2);
-  parea.Canvas.Brush.Color:=RGBToColor(255,255,255);
-  parea.Canvas.Brush.Style:=bssolid;
-  parea.Canvas.FillRect(0,0,parea.Width,parea.height);
-  parea.canvas.Refresh;
+  t:=ttreenode.create(nil,d,maxitems);
+  updateviz(true);
 end;
 
 procedure Tformmain.paintTree;
@@ -206,7 +246,37 @@ end;
 procedure Tformmain.updateStats;
 begin
   sb.Panels.Items[0].Text:='Max. Depth: '+inttostr(t.get_depth(0));
-  sb.Panels.Items[1].Text:='Max. Width: '+inttostr((t.get_depth(0)-1)*4);
+  sb.Panels.Items[1].Text:='Total Items: '+inttostr(t.TreeCount(0));
+end;
+
+procedure Tformmain.updateviz(full: boolean);
+begin
+  if full then begin
+    parea.Canvas.Brush.Color:=RGBToColor(255,255,255);
+    parea.Canvas.Brush.Style:=bssolid;
+    parea.Canvas.FillRect(0,0,parea.Width,parea.height);
+  end;
+  t.paintDots(parea.canvas);
+  if mi_show_tree.checked then paintTree;
+
+  parea.Canvas.refresh;
+end;
+
+procedure Tformmain.rescale;
+begin
+  if mi_hd_11.checked then begin
+    formmain.Height:=1024+mm.Height+sb.Height;
+    formmain.Width:=1024;
+  end;
+  if mi_hd_169.checked then begin
+    formmain.Height:=768+mm.Height+sb.Height;
+    formmain.Width:=1366;
+  end;
+  if mi_fhd_169.checked then begin
+    formmain.Height:=1080+mm.Height+sb.Height;
+    formmain.Width:=1920;
+  end;
+  clear;
 end;
 
 end.
