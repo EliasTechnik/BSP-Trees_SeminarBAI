@@ -132,9 +132,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cLocation.h" />
-    <ClInclude Include="cPlane.h" />
     <ClInclude Include="dList.h" />
-    <ClInclude Include="QuadTreeNode.h" />
+    <ClInclude Include="QuadTreeTemplate.h" />
     <ClInclude Include="TreeNode.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

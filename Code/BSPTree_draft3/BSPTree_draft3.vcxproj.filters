@@ -32,10 +32,7 @@
     <ClInclude Include="cLocation.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="cPlane.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="QuadTreeNode.h">
+    <ClInclude Include="QuadTreeTemplate.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
