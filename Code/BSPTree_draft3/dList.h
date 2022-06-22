@@ -4,20 +4,21 @@ template <class Payload>
 class dList {
 private:
 	Payload* items; //pointer to the first item in memory
-	int Count;	   //actual used space	
-	int allocSize; //allocated memory space //might be useless to store
+	unsigned int Count;	   //actual used space	
+	unsigned int allocSize; //allocated memory space //might be useless to store
 	void realloc_mem(int newsize);
-	int stepSize; //size with which the list is expanded
+	unsigned int stepSize; //size with which the list is expanded
 public:
-	dList(int size = 256); //constructor
+	dList(unsigned int size = 256); //constructor
 	~dList();//TODO: Destructor
-	int addItem(Payload item); //adds one Item to the list
-	Payload* getItem(int index); //get Item at position x
-	int getItemCount() { return Count; }; //count of items
+	unsigned int addItem(Payload item); //adds one Item to the list
+	Payload* getItem(unsigned int index); //get Item at position x
+	unsigned int findItem(Payload item); //returns the index if found or NULL
+	unsigned int getItemCount() { return Count; }; //count of items
 };
 
 template <class Payload>
-dList<Payload>::dList(int size) {
+dList<Payload>::dList(unsigned int size) {
 	Count = 0;
 	stepSize = size;
 	realloc_mem(stepSize);
@@ -38,7 +39,7 @@ void dList<Payload>::realloc_mem(int newsize) {
 }
 
 template <class Payload>
-int dList<Payload>::addItem(Payload item) {
+unsigned int dList<Payload>::addItem(Payload item) {
 	if (Count + 1 > allocSize) {
 		realloc_mem(allocSize + stepSize);
 	}
@@ -48,11 +49,22 @@ int dList<Payload>::addItem(Payload item) {
 }
 
 template <class Payload>
-Payload* dList<Payload>::getItem(int index) {
+Payload* dList<Payload>::getItem(unsigned int index) {
 	if (index >= Count) {
 		return NULL;
 	}
 	else {
 		return &items[index];
 	}
+}
+
+template <class Payload>
+unsigned int dList<Payload>::findItem(Payload item) {
+	for (unsigned int i = 0; i < Count; i++) {
+		if (items[i] == item) {
+			return i;
+			break; //might be never reached
+		}
+	}
+	return NULL;
 }
