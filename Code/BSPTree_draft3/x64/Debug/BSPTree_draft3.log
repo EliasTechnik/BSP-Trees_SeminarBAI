@@ -1,4 +1,3 @@
 ﻿  BSPTree_draft3.cpp
-C:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(12,32): warning C4101: "PayloadLocation": Unreferenzierte lokale Variable
 C:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\QuadTreeTemplate.h(38): warning C4715: "QTPayloadDivideFunction": Nicht alle Codepfade geben einen Wert zurück.
   BSPTree_draft3.vcxproj -> C:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\x64\Debug\BSPTree_draft3.exe

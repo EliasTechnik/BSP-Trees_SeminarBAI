@@ -9,28 +9,34 @@
 
 int main()
 {
-    PLPackage<int, QTLocation> PayloadLocation;
+    
     NLPackage<QTLocation, QTOperationBorder> RootLocation;
     RootLocation.opBorder.min_x = 0;
     RootLocation.opBorder.min_y = 0;
     RootLocation.opBorder.max_x = 1000;
     RootLocation.opBorder.max_y = 1000;
+    RootLocation.nodeLoc = getQTNodeLocation(RootLocation.opBorder);
 
-    //FPPackage<int,QTLocation,QTLocation,QTOperationBorder,4> = 
+    BSPTreeNode<int, QTLocation, QTLocation, QTOperationBorder, 4> * tree = new BSPTreeNode<int, QTLocation, QTLocation, QTOperationBorder, 4>(
+        4,
+        RootLocation,
+        getQTFPackage()
+        );
 
-    //BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4> tree = new BSPTreeNode<int, QTLocation, QTLocation, QTOperationBorder, 4>(4,)
-
-    /*
-    for (int i = 0; i < 40; i++) {
+    
+    for (int i = 0; i < 1000; i++) {
         int number = i;
-        l->addItem( number );
+        PLPackage<int, QTLocation> pl;
+        pl.data = i;
+        pl.point.x = rand() % 1000;
+        pl.point.y = rand() % 1000;
+        BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4> *n = tree->addPayload(pl);
+        QTLocation l = n->getNodeLocation().nodeLoc;
+        std::cout << "Node at (" << l.x << "|" << l.y << ") received the payload.";
+
     }
     
-    for (unsigned int i = 0; i < l->getItemCount(); i++) {
-        int number = *l->getItem(i);
-        std::cout << i << ": " << number << std::endl;
-    }
-   */
+
    //QuadTreeNode<char> qtn = new QuadTreeNode<char>()
     std::cout << RootLocation.opBorder.min_x << std::endl;
 

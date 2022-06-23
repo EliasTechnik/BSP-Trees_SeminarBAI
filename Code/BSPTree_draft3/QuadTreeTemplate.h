@@ -39,7 +39,7 @@ int QTPayloadDivideFunction(BSPTreeNodeDivisionArg<QTLocation, QTLocation> arg) 
 
 //NodeDivideFunction
 NLPackage<QTLocation, QTOperationBorder> QTNodeDivideFunction(NLPackage<QTLocation, QTOperationBorder> Node, int targetSubspace) {
-	NLPackage<QTLocation, QTOperationBorder> result;
+	NLPackage<QTLocation, QTOperationBorder> result = Node;
 	double x_shift = (Node.opBorder.max_x - Node.opBorder.min_x) / 4;
 	double y_shift = (Node.opBorder.max_y - Node.opBorder.min_y) / 4;
 
@@ -97,4 +97,13 @@ FPackage<QTLocation, QTLocation, QTOperationBorder> getQTFPackage() {
 	QTFPackage.outOfBoundsFunction = { QTOutOfBoundsFunction };
 	QTFPackage.payloadDivideFunction = { QTPayloadDivideFunction };
 	return QTFPackage;
+}
+
+QTLocation getQTNodeLocation(QTOperationBorder border) {
+	double dx = border.max_x - border.min_x;
+	double dy = border.max_y - border.min_y;
+	QTLocation l;
+	l.x = dx / 2.0;
+	l.y = dy / 2.0;
+	return l;
 }
