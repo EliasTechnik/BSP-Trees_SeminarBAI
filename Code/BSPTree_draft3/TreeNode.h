@@ -27,17 +27,17 @@ struct NLPackage { //Package to group the NodeLocation and the OperationBorder t
 };
 
 template <class Payload, class Location, class NodeLocation, class OperationBorder, unsigned int degree>
-struct FPPackage { //Package to group all functionpointers necesary for correct operation
+struct FPackage { //Package to group all functionpointers necesary for correct operation
 	BSPTreeNodeDivisionResult<degree>(*divideFunction)(BSPTreeNodeDivisionArg<Location, NodeLocation>);	//functionpointer to the divide function
 	NLPackage<NodeLocation, OperationBorder>(*subDivideFunction)(NLPackage<NodeLocation, OperationBorder> CurrentNode, int TargetSubspace);	//functionpointer to the subdivide function	
 	bool (*outOfBoundsFunction)(OperationBorder border, Location location); //returns true if the location is outside the border
 };
 
-template <class Payload>
+template <class Payload, class Location, class NodeLocation, class OperationBorder, unsigned int degree>
 struct DistResult {	//used for finding the neares neighbor
 	double distance;
 	Payload data;
-	BSPTreeNode owner;
+	//BSPTreeNode* owner;
 };
 
 template <class Payload, class Location, class NodeLocation, class OperationBorder, unsigned int degree>
@@ -45,7 +45,7 @@ class BSPTreeNode {
 protected:
 	BSPTreeNode childs[degree];	//holds child nodes
 	BSPTreeNode* parent;	//pointer to the parent
-	FPPackage<Payload, Location, NodeLocation, OperationBorder, degree> customFunctions; //Function Pointer Package
+	FPackage<Payload, Location, NodeLocation, OperationBorder, degree> customFunctions; //Function Pointer Package
 	NLPackage<NodeLocation, OperationBorder>(*subDivideFunction)(NLPackage<NodeLocation, OperationBorder> CurrentNode, int TargetSubspace);	//functionpointer to the subdivide function	
 	dList<PLPackage<Payload,Location>>* nodePayload;  //althougth the size is dynamic, it gets initialized to hold only PayloadLimit
 	NLPackage<NodeLocation, OperationBorder> * nodeLoc; //this can be a point, a plane or a room, the node does not care
@@ -59,11 +59,11 @@ public:
 		unsigned int _PayloadLimit, 
 		NLPackage<NodeLocation,
 		OperationBorder> _NodeLoc, 
-		FPPackage<Payload, Location, NodeLocation, OperationBorder, degree> _customFunctions);	//Default Constructor
+		FPackage<Payload, Location, NodeLocation, OperationBorder, degree> _customFunctions);	//Default Constructor
 	BSPTreeNode(
 		unsigned int _PayloadLimit, 
 		NLPackage<NodeLocation, OperationBorder>, 
-		FPPackage<Payload, Location, NodeLocation, OperationBorder, degree> _customFunctions,
+		FPackage<Payload, Location, NodeLocation, OperationBorder, degree> _customFunctions,
 		BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree> _Parent); //Constructor for childs
 	~BSPTreeNode(); //Destructor: called by parent when the sum of all elements of all childs are less the PayloadLimit
 	NLPackage<NodeLocation, OperationBorder> getNodeLocation() { return nodeLoc; };  //returns the Location of the Node
@@ -73,7 +73,7 @@ public:
 	BSPTreeNode getNodeToPayload(PLPackage<Payload, Location> p);	 //returns the node owning this Payload
 	BSPTreeNode addPayload(PLPackage<Payload,Location> p);		//adds Payload to the tree and subdivides it if necesarry (should only used by the top node) 
 	Payload getPayload(Location l);	//finds the payload at that location
-	DistResult getNearestPayload(Location l, double (*distFunction)(Location a, Location b), double minDist = 0.0); //finds the nearest payload to that location whith distance is greater or equal to minDist 
+	DistResult<Payload, Location, NodeLocation, OperationBorder, degree> getNearestPayload(Location l, double (*distFunction)(Location a, Location b), double minDist = 0.0); //finds the nearest payload to that location whith distance is greater or equal to minDist 
 	Payload getPayload(unsigned int index);
 	int getPayloadCount();
 	bool deletePayload(PLPackage<Payload, Location>); //true if the Payload was deleted //issues cleanup
@@ -89,15 +89,14 @@ void BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::subd
 		childs[i] = new BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>(
 			this->payloadLimit,
 			np,
-			divideFunction,
-			subDivideFunction,
+			this->customFunctions,
 			this);
 	}
 	this->nodeIsLeaf = false;
 	//at this point the payload should be distributed to the childs	becaus the node is no longer a leaf
 
 	for(unsigned int i = 0; i < this->nodePayload.getItemCount(); i++) {
-		this->addItemToChild(this->nodePayload->getItem(i))
+		this->addItemToChild(this->nodePayload->getItem(i));
 	}
 	delete this->nodePayload; 
 }
@@ -120,7 +119,7 @@ template <class Payload, class Location, class NodeLocation, class OperationBord
 BSPTreeNode<Payload, Location, NodeLocation,OperationBorder, degree>::BSPTreeNode(
 	unsigned int _PayloadLimit, 
 	NLPackage<NodeLocation, OperationBorder> _NodeLoc,
-	FPPackage<Payload, Location, NodeLocation, OperationBorder, degree> _customFunctions)
+	FPackage<Payload, Location, NodeLocation, OperationBorder, degree> _customFunctions)
 {
 	this->nodeIsLeaf = true; //true because there is not any childs added jet
 	this->parent = NULL;
@@ -135,7 +134,7 @@ template<class Payload, class Location, class NodeLocation, class OperationBorde
 BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::BSPTreeNode(
 	unsigned int _PayloadLimit,
 	NLPackage<NodeLocation, OperationBorder> _NodeLoc,
-	FPPackage<Payload, Location, NodeLocation, OperationBorder, degree> _customFunctions,
+	FPackage<Payload, Location, NodeLocation, OperationBorder, degree> _customFunctions,
 	BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree> _Parent)
 {
 	this->nodeIsLeaf = true; //true because there is not any childs added jet
@@ -186,7 +185,7 @@ BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::getNodeTo
 	}
 	else {
 		for (int i = 0; i < degree; i++) {
-			result = this->childs[i]->getNodeToPayload(p)
+			result = this->childs[i]->getNodeToPayload(p);
 			if (result != NULL) {
 				return result; //we found it in a child node
 			}
@@ -250,15 +249,15 @@ Payload BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::g
 		//determine the right child to ask
 		BSPTreeNodeDivisionArg<Location, NodeLocation> arg;
 		arg.NodeLocation = this->nodeLoc;
-		arg.PayloadLocation = p.point;
+		arg.PayloadLocation = l;
 		BSPTreeNodeDivisionResult<degree> result;
 		result.Subspace = divideFunction(arg);
-		return this->childs[result.Subspace]->getPayload(p);
+		return this->childs[result.Subspace]->getPayload(l);
 	}
 }
 
 template<class Payload, class Location, class NodeLocation, class OperationBorder, unsigned int degree>
-DistResult<Payload> BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::getNearestPayload(Location l, double(*distFunction)(Location a, Location b), double minDist)
+DistResult<Payload, Location, NodeLocation, OperationBorder,degree> BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::getNearestPayload(Location l, double(*distFunction)(Location a, Location b), double minDist)
 {
 	DistResult<Payload> dr = NULL;
 	if (this->nodeIsLeaf) {
@@ -268,7 +267,7 @@ DistResult<Payload> BSPTreeNode<Payload, Location, NodeLocation, OperationBorder
 			double d = distFunction(l, pl.point);
 			if (d < distance) {
 				distance = d;
-				rp = pl.data;
+				//dr = pl.data;
 			}
 		}
 	}
@@ -321,19 +320,6 @@ BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::getRoot()
 		return this;
 	}
 }
-
-
-
-
-/*
-	Payload getPayload(Location l);	//finds the payload at that location
-	Payload getNearestPayload(Location l, double (*distFunction)(Location a, Location b), double minDist = 0.0); //finds the nearest payload to that location whith distance is greater or equal to minDist
-	Payload getPayload(unsigned int index);
-	int getPayloadCount();
-	bool deletePayload(PLPackage<Payload, Location>); //true if the Payload was deleted //issues sanitize
-	BSPTreeNode getRoot();
-
-*/
 
 
 

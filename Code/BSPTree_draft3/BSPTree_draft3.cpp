@@ -2,12 +2,18 @@
 //
 
 #include <iostream>
+#include <string>
 #include "TreeNode.h"
+#include "QuadTreeTemplate.h"
 
 
 int main()
 {
-    dList<int> * l = new dList<int>(10);
+    PLPackage<int, QTLocation> PaloadLocation;
+    NLPackage<QTLocation, QTOperationBorder> RootLocation;
+    FPPackage<int,QTLocation,QTLocation,QTOperationBorder,4> = 
+
+    BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4> tree = new BSPTreeNode<int, QTLocation, QTLocation, QTOperationBorder, 4>(4,)
 
 
     for (int i = 0; i < 40; i++) {
@@ -15,7 +21,7 @@ int main()
         l->addItem( number );
     }
     
-    for (int i = 0; i < l->getItemCount(); i++) {
+    for (unsigned int i = 0; i < l->getItemCount(); i++) {
         int number = *l->getItem(i);
         std::cout << i << ": " << number << std::endl;
     }

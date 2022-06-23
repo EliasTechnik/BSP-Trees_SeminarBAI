@@ -17,6 +17,8 @@ struct QTOperationBorder {
 	double max_y;
 };
 
+template <class Payload>
+
 //divideFunction
 BSPTreeNodeDivisionResult<4> QTDivideFunction(BSPTreeNodeDivisionArg<QTLocation, QTLocation> arg) {
 	BSPTreeNodeDivisionResult<4> result;

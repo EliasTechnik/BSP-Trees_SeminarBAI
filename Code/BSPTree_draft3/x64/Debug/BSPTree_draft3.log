@@ -1,2 +1,3 @@
 ﻿  BSPTree_draft3.cpp
+C:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(18,23): warning C4018: "<": Konflikt zwischen "signed" und "unsigned"
   BSPTree_draft3.vcxproj -> C:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\x64\Debug\BSPTree_draft3.exe
