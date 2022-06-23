@@ -9,13 +9,18 @@
 
 int main()
 {
-    PLPackage<int, QTLocation> PaloadLocation;
+    PLPackage<int, QTLocation> PayloadLocation;
     NLPackage<QTLocation, QTOperationBorder> RootLocation;
-    FPPackage<int,QTLocation,QTLocation,QTOperationBorder,4> = 
+    RootLocation.opBorder.min_x = 0;
+    RootLocation.opBorder.min_y = 0;
+    RootLocation.opBorder.max_x = 1000;
+    RootLocation.opBorder.max_y = 1000;
 
-    BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4> tree = new BSPTreeNode<int, QTLocation, QTLocation, QTOperationBorder, 4>(4,)
+    //FPPackage<int,QTLocation,QTLocation,QTOperationBorder,4> = 
 
+    //BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4> tree = new BSPTreeNode<int, QTLocation, QTLocation, QTOperationBorder, 4>(4,)
 
+    /*
     for (int i = 0; i < 40; i++) {
         int number = i;
         l->addItem( number );
@@ -25,9 +30,9 @@ int main()
         int number = *l->getItem(i);
         std::cout << i << ": " << number << std::endl;
     }
-
+   */
    //QuadTreeNode<char> qtn = new QuadTreeNode<char>()
-
+    std::cout << RootLocation.opBorder.min_x << std::endl;
 
 
     std::cout << "Hello World!\n";

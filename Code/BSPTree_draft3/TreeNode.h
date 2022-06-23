@@ -2,17 +2,11 @@
 #include "dList.h"
 #include <limits>
 
-template <int degree> //assures typesafety
-struct BSPTreeNodeDivisionResult { //returned by the division function
-	int Subspace;
-};
-
 template <class Location, class NodeLocation>
 struct BSPTreeNodeDivisionArg { //given to the division function
 	NodeLocation NodeLocation;
 	Location PayloadLocation;
 };
-
 
 template <class Payload, class Location>
 struct PLPackage { //Package to group the Payload and the location data
@@ -26,10 +20,10 @@ struct NLPackage { //Package to group the NodeLocation and the OperationBorder t
 	OperationBorder opBorder;	//Border within operation is possible
 };
 
-template <class Payload, class Location, class NodeLocation, class OperationBorder, unsigned int degree>
+template <class Location, class NodeLocation, class OperationBorder>
 struct FPackage { //Package to group all functionpointers necesary for correct operation
-	BSPTreeNodeDivisionResult<degree>(*divideFunction)(BSPTreeNodeDivisionArg<Location, NodeLocation>);	//functionpointer to the divide function
-	NLPackage<NodeLocation, OperationBorder>(*subDivideFunction)(NLPackage<NodeLocation, OperationBorder> CurrentNode, int TargetSubspace);	//functionpointer to the subdivide function	
+	int (*payloadDivideFunction)(BSPTreeNodeDivisionArg<Location, NodeLocation>);	//functionpointer to the divide function
+	NLPackage<NodeLocation, OperationBorder>(*nodeDivideFunction)(NLPackage<NodeLocation, OperationBorder>, int);	//functionpointer to the subdivide function	
 	bool (*outOfBoundsFunction)(OperationBorder border, Location location); //returns true if the location is outside the border
 };
 
@@ -45,8 +39,7 @@ class BSPTreeNode {
 protected:
 	BSPTreeNode childs[degree];	//holds child nodes
 	BSPTreeNode* parent;	//pointer to the parent
-	FPackage<Payload, Location, NodeLocation, OperationBorder, degree> customFunctions; //Function Pointer Package
-	NLPackage<NodeLocation, OperationBorder>(*subDivideFunction)(NLPackage<NodeLocation, OperationBorder> CurrentNode, int TargetSubspace);	//functionpointer to the subdivide function	
+	FPackage<Location, NodeLocation, OperationBorder> customFunctions; //Function Pointer Package	
 	dList<PLPackage<Payload,Location>>* nodePayload;  //althougth the size is dynamic, it gets initialized to hold only PayloadLimit
 	NLPackage<NodeLocation, OperationBorder> * nodeLoc; //this can be a point, a plane or a room, the node does not care
 	bool nodeIsLeaf;
@@ -59,11 +52,11 @@ public:
 		unsigned int _PayloadLimit, 
 		NLPackage<NodeLocation,
 		OperationBorder> _NodeLoc, 
-		FPackage<Payload, Location, NodeLocation, OperationBorder, degree> _customFunctions);	//Default Constructor
+		FPackage<Location, NodeLocation, OperationBorder> _customFunctions);	//Default Constructor
 	BSPTreeNode(
 		unsigned int _PayloadLimit, 
 		NLPackage<NodeLocation, OperationBorder>, 
-		FPackage<Payload, Location, NodeLocation, OperationBorder, degree> _customFunctions,
+		FPackage<Location, NodeLocation, OperationBorder> _customFunctions,
 		BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree> _Parent); //Constructor for childs
 	~BSPTreeNode(); //Destructor: called by parent when the sum of all elements of all childs are less the PayloadLimit
 	NLPackage<NodeLocation, OperationBorder> getNodeLocation() { return nodeLoc; };  //returns the Location of the Node
@@ -79,13 +72,14 @@ public:
 	bool deletePayload(PLPackage<Payload, Location>); //true if the Payload was deleted //issues cleanup
 	BSPTreeNode getRoot();
 };
+
 //subdivide
 template<class Payload, class Location, class NodeLocation, class OperationBorder, unsigned int degree>
 void BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::subdivide()
 {
 	NLPackage<NodeLocation, OperationBorder> np;
 	for (unsigned int i = 0; i < degree; i++) {
-		np = SubDivideFunction(this->nodeLoc, i);
+		np = nodeDivideFunction(this->nodeLoc, i);
 		childs[i] = new BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>(
 			this->payloadLimit,
 			np,
@@ -109,9 +103,7 @@ BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::addItemTo
 	BSPTreeNodeDivisionArg<Location, NodeLocation> arg;
 	arg.NodeLocation = this->nodeLoc;
 	arg.PayloadLocation = p.point;
-	BSPTreeNodeDivisionResult<degree> result;
-	result.Subspace = divideFunction(arg);
-	this->childs[result.Subspace].addPayload(p);
+	this->childs[payloadDivideFunction(arg)].addPayload(p);
 }
 
 //Constructor 1
@@ -119,7 +111,7 @@ template <class Payload, class Location, class NodeLocation, class OperationBord
 BSPTreeNode<Payload, Location, NodeLocation,OperationBorder, degree>::BSPTreeNode(
 	unsigned int _PayloadLimit, 
 	NLPackage<NodeLocation, OperationBorder> _NodeLoc,
-	FPackage<Payload, Location, NodeLocation, OperationBorder, degree> _customFunctions)
+	FPackage<Location, NodeLocation, OperationBorder> _customFunctions)
 {
 	this->nodeIsLeaf = true; //true because there is not any childs added jet
 	this->parent = NULL;
@@ -134,7 +126,7 @@ template<class Payload, class Location, class NodeLocation, class OperationBorde
 BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::BSPTreeNode(
 	unsigned int _PayloadLimit,
 	NLPackage<NodeLocation, OperationBorder> _NodeLoc,
-	FPackage<Payload, Location, NodeLocation, OperationBorder, degree> _customFunctions,
+	FPackage<Location, NodeLocation, OperationBorder> _customFunctions,
 	BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree> _Parent)
 {
 	this->nodeIsLeaf = true; //true because there is not any childs added jet
@@ -206,7 +198,7 @@ BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::addPayloa
 		//check if we have a parent
 		if (this->parent != NULL) {
 			//give the Payload to the Parent
-			this->parent->addPayload(p);
+			result = this->parent->addPayload(p);
 		}
 		else {
 			return NULL; //We return NULL because ther is no parent and the bounds are exceded for that item
@@ -220,7 +212,7 @@ BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::addPayloa
 			//is Leaf
 			//check for itemLimit
 			if (this->nodePayload->getItemCount() >= this->payloadLimit - 1) {
-				//subdivide
+				//subdivide	Node
 				this->subdivide();
 				result = this->addItemToChild(p);
 			}
@@ -250,9 +242,7 @@ Payload BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::g
 		BSPTreeNodeDivisionArg<Location, NodeLocation> arg;
 		arg.NodeLocation = this->nodeLoc;
 		arg.PayloadLocation = l;
-		BSPTreeNodeDivisionResult<degree> result;
-		result.Subspace = divideFunction(arg);
-		return this->childs[result.Subspace]->getPayload(l);
+		return this->childs[payloadDivideFunction(arg)]->getPayload(l);
 	}
 }
 
