@@ -17,3 +17,11 @@ https://www.youtube.com/watch?v=OJxEcs0w_kE ....Quadtree
 Important:
 
 https://www.cs.cmu.edu/afs/andrew/scs/cs/15-463/2001/pub/www/notes/bsp.html
+
+
+
+Find neighbor:
+	https://stackoverflow.com/questions/32412107/quadtree-find-neighbor
+	http://www.lcad.icmc.usp.br/~jbatista/procimg/quadtree_neighbours.pdf
+	http://homepage.divms.uiowa.edu/~kvaradar/sp2012/daa/ann.pdf
+	http://web.archive.org/web/20120907211934/http://ww1.ucmss.com/books/LFS/CSREA2006/MSV4517.pdf

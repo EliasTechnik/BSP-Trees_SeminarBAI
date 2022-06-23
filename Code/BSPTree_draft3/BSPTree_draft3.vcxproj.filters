@@ -29,9 +29,6 @@
     <ClInclude Include="dList.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="cLocation.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="QuadTreeTemplate.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
