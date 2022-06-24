@@ -15,6 +15,7 @@ public:
 	Payload* getItem(unsigned int index); //get Item at position x
 	unsigned int findItem(Payload item); //returns the index if found or NULL
 	unsigned int getItemCount() { return Count; }; //count of items
+	void clear(); //clears the list and releases memory without destroing the instance
 };
 
 template <class Payload>
@@ -26,14 +27,14 @@ dList<Payload>::dList(unsigned int size) {
 
 template<class Payload>
 dList<Payload>::~dList(){
-	delete[] items; //free ocupied memory
+	//delete[] items; //free ocupied memory
 }
 
 template <class Payload>
 void dList<Payload>::realloc_mem(int newsize) {
 	Payload* newitems = new Payload[newsize]; //throws "bad_alloc" if it fails 
 	memcpy(newitems, items, sizeof(Payload) * allocSize); //copy old arry to new destination
-	delete[] items;	//free's old memory
+	delete items;	//free's old memory
 	items = newitems;
 	allocSize = newsize;
 }
@@ -67,4 +68,15 @@ unsigned int dList<Payload>::findItem(Payload item) {
 		}
 	}
 	return NULL;
+}
+
+template<class Payload>
+void dList<Payload>::clear()
+{
+	Payload* newitems = new Payload[0]; //throws "bad_alloc" if it fails 
+	delete items;	//free's old memory
+	items = newitems;
+	allocSize = 0;
+	Count = 0;
+
 }

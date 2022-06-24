@@ -46,7 +46,7 @@ protected:
 	unsigned int payloadLimit;	 //how much payload can one node hold until it subdivides
 	void cleanup();	//checks the childs, if the are all leves then cleanup is performed
 	void subdivide(); //subdivides the node
-	BSPTreeNode* addItemToChild(PLPackage<Payload, Location> p);
+	bool addItemToChild(PLPackage<Payload, Location> p);
 public:
 	BSPTreeNode(
 		unsigned int _PayloadLimit, 
@@ -63,7 +63,7 @@ public:
 	BSPTreeNode* getChild(unsigned int index);	//gets the child at index in this node (or void if it isnt a leaf
 	BSPTreeNode* getParent();			//gets the parent Node
 	BSPTreeNode* getNodeToPayload(PLPackage<Payload, Location> p);	 //returns the node owning this Payload
-	BSPTreeNode* addPayload(PLPackage<Payload,Location> p);		//adds Payload to the tree and subdivides it if necesarry (should only used by the top node) 
+	bool addPayload(PLPackage<Payload,Location> p);		//adds Payload to the tree and subdivides it if necesarry (should only used by the top node) 
 	Payload getPayload(Location l);	//finds the payload at that location
 	DistResult<Payload, Location, NodeLocation, OperationBorder, degree> getNearestPayload(Location l, double (*distFunction)(Location a, Location b), double minDist = 0.0); //finds the nearest payload to that location whith distance is greater or equal to minDist 
 	Payload getPayload(unsigned int index);
@@ -91,13 +91,12 @@ void BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::subd
 	for(unsigned int i = 0; i < this->nodePayload->getItemCount(); i++) {
 		this->addItemToChild(*this->nodePayload->getItem(i));
 	}
-	delete this->nodePayload; 
+	this->nodePayload->clear();
 }
 
 //addItemToChild
 template<class Payload, class Location, class NodeLocation, class OperationBorder, unsigned int degree>
-BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>*
-BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::addItemToChild(PLPackage<Payload, Location> p)
+bool BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::addItemToChild(PLPackage<Payload, Location> p)
 {
 	BSPTreeNodeDivisionArg<Location, NodeLocation> arg;
 	arg.NodeLocation = this->nodeLoc.nodeLoc;
@@ -187,11 +186,10 @@ BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::getNodeTo
 
 //addPayload
 template<class Payload, class Location, class NodeLocation, class OperationBorder, unsigned int degree>
-BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>*
-BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::addPayload(PLPackage<Payload, Location> p)
+bool BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::addPayload(PLPackage<Payload, Location> p)
 {
 	//adds Payload to the tree and subdivides it if necesarry (should only used by the top node)
-	BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree> *result = nullptr;
+	bool result = false;
 	//Check if Payload is out of bound
 	if (this->customFunctions.outOfBoundsFunction(this->nodeLoc.opBorder, p.point)) {
 		//check if we have a parent
@@ -200,7 +198,7 @@ BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::addPayloa
 			result = this->parent->addPayload(p);
 		}
 		else {
-			return nullptr; //We return nullptr because ther is no parent and the bounds are exceded for that item
+			return false; //We return nullptr because ther is no parent and the bounds are exceded for that item
 		}
 	}
 	else {
@@ -217,7 +215,7 @@ BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::addPayloa
 			}
 			else {
 				this->nodePayload->addItem(p);
-				result = this;
+				result = true;
 			}
 		}
 	}

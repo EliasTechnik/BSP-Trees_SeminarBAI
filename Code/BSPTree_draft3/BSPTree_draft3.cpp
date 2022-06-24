@@ -30,9 +30,10 @@ int main()
         pl.data = i;
         pl.point.x = rand() % 1000;
         pl.point.y = rand() % 1000;
-        BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4> *n = tree->addPayload(pl);
-        QTLocation l = n->getNodeLocation().nodeLoc;
-        std::cout << "Node at (" << l.x << "|" << l.y << ") received the payload.";
+        std::cout << "generated payload " << pl.data << " at (" << pl.point.x << "|" << pl.point.y << ")" << std::endl;
+        tree->addPayload(pl);
+        //QTLocation l = n->getNodeLocation().nodeLoc;
+        //std::cout << "Node at (" << l.x << "|" << l.y << ") received the payload.";
 
     }
     
