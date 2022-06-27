@@ -73,8 +73,8 @@ unsigned int dList<Payload>::findItem(Payload item) {
 template<class Payload>
 void dList<Payload>::clear()
 {
-	Payload* newitems = new Payload[0]; //throws "bad_alloc" if it fails 
-	delete items;	//free's old memory
+	Payload* newitems = new Payload[1]; //throws "bad_alloc" if it fails 
+	//delete items;	//free's old memory
 	items = newitems;
 	allocSize = 0;
 	Count = 0;

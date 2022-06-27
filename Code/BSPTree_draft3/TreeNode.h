@@ -2,6 +2,9 @@
 #include "dList.h"
 #include <limits>
 
+//for testing:
+#include <iostream>
+
 template <class Location, class NodeLocation>
 struct BSPTreeNodeDivisionArg { //given to the division function
 	NodeLocation NodeLocation;
@@ -44,7 +47,7 @@ protected:
 	NLPackage<NodeLocation, OperationBorder> nodeLoc; //this can be a point, a plane or a room, the node does not care
 	bool nodeIsLeaf;
 	unsigned int payloadLimit;	 //how much payload can one node hold until it subdivides
-	void cleanup();	//checks the childs, if the are all leves then cleanup is performed
+	void cleanup();	//checks the childs, if the are all empty leves then cleanup is performed and the leaves removed
 	void subdivide(); //subdivides the node
 	bool addItemToChild(PLPackage<Payload, Location> p);
 public:
@@ -76,6 +79,7 @@ public:
 template<class Payload, class Location, class NodeLocation, class OperationBorder, unsigned int degree>
 void BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::subdivide()
 {
+	std::cout << "Going to subdivide..." <<std::endl;
 	NLPackage<NodeLocation, OperationBorder> np;
 	for (unsigned int i = 0; i < degree; i++) {
 		np = customFunctions.nodeDivideFunction(this->nodeLoc, i);
@@ -83,7 +87,8 @@ void BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::subd
 			this->payloadLimit,
 			np,
 			this->customFunctions,
-			*this);
+			&this);
+		std::cout << "created Child No. " << i << std::endl;
 	}
 	this->nodeIsLeaf = false;
 	//at this point the payload should be distributed to the childs	becaus the node is no longer a leaf
@@ -91,7 +96,7 @@ void BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::subd
 	for(unsigned int i = 0; i < this->nodePayload->getItemCount(); i++) {
 		this->addItemToChild(*this->nodePayload->getItem(i));
 	}
-	this->nodePayload->clear();
+	//this->nodePayload->clear();
 }
 
 //addItemToChild
@@ -101,7 +106,9 @@ bool BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::addI
 	BSPTreeNodeDivisionArg<Location, NodeLocation> arg;
 	arg.NodeLocation = this->nodeLoc.nodeLoc;
 	arg.PayloadLocation = p.point;
-	return this->childs[customFunctions.payloadDivideFunction(arg)]->addPayload(p);
+	unsigned int childID = customFunctions.payloadDivideFunction(arg);
+	BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree> *node = childs[childID];
+	return node->addPayload(p);
 }
 
 //Constructor 1
