@@ -1,6 +1,7 @@
 #pragma once
 #include "dList.h"
 #include <limits>
+#include "helpers.h"
 
 //for testing:
 #include <iostream>
@@ -40,7 +41,7 @@ struct DistResult {	//used for finding the neares neighbor
 template <class Payload, class Location, class NodeLocation, class OperationBorder, unsigned int degree>
 class BSPTreeNode {
 protected:
-	BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree> *childs[degree];	//holds child nodes
+	dList<BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>> *childs;	//holds child nodes
 	BSPTreeNode* parent;	//pointer to the parent
 	FPackage<Location, NodeLocation, OperationBorder> customFunctions; //Function Pointer Package	
 	dList<PLPackage<Payload,Location>> *nodePayload;  //althougth the size is dynamic, it gets initialized to hold only PayloadLimit
@@ -81,22 +82,25 @@ void BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::subd
 {
 	std::cout << "Going to subdivide..." <<std::endl;
 	NLPackage<NodeLocation, OperationBorder> np;
+	childs = new dList< BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>>(degree);
 	for (unsigned int i = 0; i < degree; i++) {
-		np = customFunctions.nodeDivideFunction(this->nodeLoc, i);
-		childs[i] = new BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>(
+		np = customFunctions.nodeDivideFunction(this->nodeLoc, i);			  
+		BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>* cNode = new BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>(
 			this->payloadLimit,
 			np,
 			this->customFunctions,
-			&this);
-		std::cout << "created Child No. " << i << std::endl;
+			*this);
+		
+		this->childs->addItem(cNode);
+		//std::cout << "(created) Child No. " << i << std::endl;
 	}
 	this->nodeIsLeaf = false;
 	//at this point the payload should be distributed to the childs	becaus the node is no longer a leaf
 
 	for(unsigned int i = 0; i < this->nodePayload->getItemCount(); i++) {
-		this->addItemToChild(*this->nodePayload->getItem(i));
+		this->addItemToChild(this->nodePayload->getItem(i));
 	}
-	//this->nodePayload->clear();
+	delete this->nodePayload;
 }
 
 //addItemToChild
@@ -107,11 +111,12 @@ bool BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::addI
 	arg.NodeLocation = this->nodeLoc.nodeLoc;
 	arg.PayloadLocation = p.point;
 	unsigned int childID = customFunctions.payloadDivideFunction(arg);
-	BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree> *node = childs[childID];
+	std::cout << "Try adding Payload to child No. " << childID << std::endl;
+	BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree> node = this->childs->getItemPointer(childID);
 	return node->addPayload(p);
 }
 
-//Constructor 1
+//Constructor extern (root)
 template <class Payload, class Location, class NodeLocation, class OperationBorder, unsigned int degree>
 BSPTreeNode<Payload, Location, NodeLocation,OperationBorder, degree>::BSPTreeNode(
 	unsigned int _PayloadLimit, 
@@ -126,7 +131,7 @@ BSPTreeNode<Payload, Location, NodeLocation,OperationBorder, degree>::BSPTreeNod
 	this->customFunctions = _customFunctions;
 }
 
-//Constructor 2
+//Constructor intern (child)
 template<class Payload, class Location, class NodeLocation, class OperationBorder, unsigned int degree>
 BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::BSPTreeNode(
 	unsigned int _PayloadLimit,
@@ -134,20 +139,34 @@ BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::BSPTreeNo
 	FPackage<Location, NodeLocation, OperationBorder> _customFunctions,
 	BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree> _Parent)
 {
-	this->nodeIsLeaf = true; //true because there is not any childs added jet
+	//log("Creating Child with internal constructor");
+	this->nodeIsLeaf = true; //true because there is not any childs added yet
 	this->parent = &_Parent;
 	this->payloadLimit = _PayloadLimit;
 	this->nodeLoc = _NodeLoc;
 	this->nodePayload = new dList<PLPackage<Payload, Location>>(payloadLimit);
 	this->customFunctions = _customFunctions;
+	//log("done with constructing");
 }
 
 //Destructor
 template<class Payload, class Location, class NodeLocation, class OperationBorder, unsigned int degree>
 BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::~BSPTreeNode() {
-	delete this->nodePayload;
-	for (unsigned int i = 0; i < degree; i++) {
-		delete this->childs[i];
+	log("Tree Node Deconstructor call");
+	if (!this->nodeIsLeaf) {
+		//delete childs first
+		for (unsigned int i = childs->getItemCount(); i <= 0; i--) {
+			delete this->childs->getItem(i);
+			//BSPTreeNode cnode = this->childs->getItem(i);
+			//delete cnode;
+		}
+		delete this->childs;
+	}
+	else {
+		//we are Leaf, lets delete the payload
+		if (!(this->nodePayload == nullptr)) {
+			delete this->nodePayload;
+		}
 	}
 }
 
@@ -202,14 +221,17 @@ bool BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::addP
 		//check if we have a parent
 		if (this->parent != nullptr) {
 			//give the Payload to the Parent
+			//log("addPayload: Item belongs to parent or higher node.");
 			result = this->parent->addPayload(p);
 		}
 		else {
-			return false; //We return nullptr because ther is no parent and the bounds are exceded for that item
+			//log("addPayload: Item out of bounds.");
+			return false; //We return false because ther is no parent and the bounds are exceded for that item
 		}
 	}
 	else {
 		if (!this->nodeIsLeaf) {
+			//log("addPayload: Item belongs to leave...");
 			result = this->addItemToChild(p);
 		}
 		else {
@@ -217,11 +239,13 @@ bool BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::addP
 			//check for itemLimit
 			if (this->nodePayload->getItemCount() >= this->payloadLimit - 1) {
 				//subdivide	Node
+				//log("addPayload: Item belongs this node but we are full so we subdivide.");
 				this->subdivide();
 				result = this->addItemToChild(p);
 			}
 			else {
 				this->nodePayload->addItem(p);
+				//log("addPayload: Item belongs this node.");
 				result = true;
 			}
 		}

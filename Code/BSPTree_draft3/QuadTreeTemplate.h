@@ -2,6 +2,7 @@
 
 #include "TreeNode.h"
 #include <cmath>
+#include "helpers.h"
 
 //Location (for the Quadtree this is also NodeLocation)
 struct QTLocation {
@@ -17,24 +18,36 @@ struct QTOperationBorder {
 	double max_y;
 };
 
+void printQTLocation(QTLocation payload, QTLocation node) {	 //for debgging
+	std::cout << "Payload at (" << payload.x << "|" << payload.y << ")" << std::endl;
+	std::cout << "Node at (" << node.x << "|" << node.y << ")" << std::endl;
+}
+
 //PayloadDivideFunction
 int QTPayloadDivideFunction(BSPTreeNodeDivisionArg<QTLocation, QTLocation> arg) {
+	printQTLocation(arg.PayloadLocation,arg.NodeLocation);
 	if ((arg.PayloadLocation.x < arg.NodeLocation.x) && (arg.PayloadLocation.y < arg.NodeLocation.y)) {
 		//northwest
+		log("northwest: 0");
 		return 0;
 	}
 	if ((arg.PayloadLocation.x >= arg.NodeLocation.x) && (arg.PayloadLocation.y < arg.NodeLocation.y)) {
 		//northeast
+		log("northeast: 1");
 		return 1;
 	}
-	if ((arg.PayloadLocation.x > arg.NodeLocation.x) && (arg.PayloadLocation.y >= arg.NodeLocation.y)) {
-		//southwest
+	if ((arg.PayloadLocation.x >= arg.NodeLocation.x) && (arg.PayloadLocation.y >= arg.NodeLocation.y)) {
+		//southeast
+		log("southeast: 2");
 		return 2;
 	}
 	if ((arg.PayloadLocation.x < arg.NodeLocation.x) && (arg.PayloadLocation.y >= arg.NodeLocation.y)) {
-		//southeast
+		//southwest
+		log("southwest: 3");
 		return 3;
 	}
+	log("unknown: 4");
+	return 4; //if we end up here somehow something is broken
 }
 
 //NodeDivideFunction
@@ -107,3 +120,4 @@ QTLocation getQTNodeLocation(QTOperationBorder border) {
 	l.y = dy / 2.0;
 	return l;
 }
+

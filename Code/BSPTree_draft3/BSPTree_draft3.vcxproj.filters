@@ -29,5 +29,8 @@
     <ClInclude Include="QuadTreeTemplate.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="helpers.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

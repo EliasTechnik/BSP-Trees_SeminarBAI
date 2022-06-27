@@ -25,3 +25,6 @@ Find neighbor:
 	http://www.lcad.icmc.usp.br/~jbatista/procimg/quadtree_neighbours.pdf
 	http://homepage.divms.uiowa.edu/~kvaradar/sp2012/daa/ann.pdf
 	http://web.archive.org/web/20120907211934/http://ww1.ucmss.com/books/LFS/CSREA2006/MSV4517.pdf
+	
+	
+durch "new" wird Speicherplatz auf dem Heap reserviert. Dieser muss durch delete wieder freigegeben werden.

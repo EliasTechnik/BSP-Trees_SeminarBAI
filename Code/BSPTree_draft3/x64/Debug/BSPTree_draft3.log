@@ -1,10 +1,10 @@
 ﻿  BSPTree_draft3.cpp
-C:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(90): error C2102: "&" erwartet L-Wert
-C:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(81): message : beim Kompilieren der Klasse Vorlage-Memberfunktion "void BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>::subdivide(void)"
-C:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(220): message : Siehe Verweis auf die gerade kompilierte Instanziierung "void BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>::subdivide(void)" der Funktions-Vorlage.
-C:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(120): message : beim Kompilieren der Klasse Vorlage-Memberfunktion "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>::BSPTreeNode(unsigned int,NLPackage<QTLocation,QTOperationBorder>,FPackage<QTLocation,QTLocation,QTOperationBorder>)"
-C:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(20): message : Siehe Verweis auf die gerade kompilierte Instanziierung "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>::BSPTreeNode(unsigned int,NLPackage<QTLocation,QTOperationBorder>,FPackage<QTLocation,QTLocation,QTOperationBorder>)" der Funktions-Vorlage.
-C:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(20): message : Siehe Verweis auf die gerade kompilierte Klasse Vorlage-Instanziierung "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>".
-C:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(86,88): error C2664: "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>::BSPTreeNode(unsigned int,NLPackage<QTLocation,QTOperationBorder>,FPackage<QTLocation,QTLocation,QTOperationBorder>,BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>)" : Konvertierung von Argument 4 von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4> **" in "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>" nicht möglich
-C:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(90,1): message : Quelltyp konnte von keinem Konstruktor angenommen werden, oder die Überladungsauflösung des Konstruktors ist mehrdeutig
-C:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(58,2): message : Siehe Deklaration von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>::BSPTreeNode"
+C:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(159,1): error C2440: "delete": "Payload" kann nicht in "void*" konvertiert werden
+          with
+          [
+              Payload=BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>
+          ]
+C:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(159,32): message : Kein benutzerdefinierter Konvertierungsoperator verfügbar, der diese Konvertierung durchführen kann, oder der Operator kann nicht aufgerufen werden
+C:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(154): message : beim Kompilieren der Klasse Vorlage-Memberfunktion "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>::~BSPTreeNode(void)"
+C:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(77): message : Siehe Verweis auf die gerade kompilierte Instanziierung "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>::~BSPTreeNode(void)" der Funktions-Vorlage.
+C:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(51): message : Siehe Verweis auf die gerade kompilierte Klasse Vorlage-Instanziierung "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>".

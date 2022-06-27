@@ -6,9 +6,40 @@
 #include "TreeNode.h"
 #include "QuadTreeTemplate.h"
 
+//for testing
+#include "dList.h"
+
 
 int main()
 {
+    //Testing dList
+    /*
+    dList<int> * list = new dList<int>(500);
+
+    for (int i = 0; i < 1000000; i++) {
+        list->addItem(rand() % 1000);
+        //std::cout << "added item " << i << " to the list" << std::endl;
+    }
+
+    for (unsigned int i = 0; i < list->getItemCount(); i++) {
+        int a = list->getItem(i);
+        //std::cout << "got item " << a << " from the list" << std::endl;
+    }
+    delete list;
+
+    std::cout << "Press Enter to continue..." << std::endl;
+    std::cin.get();
+    list = new dList<int>(500);
+
+
+    for (int i = 0; i < 1000000; i++) {
+        list->addItem(rand() % 1000);
+        //std::cout << "added item " << i << " to the list" << std::endl;
+    }
+    delete list;
+    std::cout << "Press Enter to continue..." << std::endl;
+    std::cin.get();
+    */
     
     NLPackage<QTLocation, QTOperationBorder> RootLocation;
     RootLocation.opBorder.min_x = 0;
@@ -24,7 +55,7 @@ int main()
         );
 
     
-    for (int i = 0; i < 1000; i++) {
+    for (int i = 0; i < 500; i++) {
         int number = i;
         PLPackage<int, QTLocation> pl;
         pl.data = i;
@@ -32,15 +63,30 @@ int main()
         pl.point.y = rand() % 1000;
         std::cout << "generated payload " << pl.data << " at (" << pl.point.x << "|" << pl.point.y << ")" << std::endl;
         tree->addPayload(pl);
-        //QTLocation l = n->getNodeLocation().nodeLoc;
-        //std::cout << "Node at (" << l.x << "|" << l.y << ") received the payload.";
+    }
+    delete tree;
+    std::cout << "Deleted Tree\n";
+    std::cout << "Press Enter to continue..." << std::endl;
+    std::cin.get();
+    tree = new BSPTreeNode<int, QTLocation, QTLocation, QTOperationBorder, 4>(
+        4,
+        RootLocation,
+        getQTFPackage()
+        );
 
+    for (int i = 0; i < 500; i++) {
+        int number = i;
+        PLPackage<int, QTLocation> pl;
+        pl.data = i;
+        pl.point.x = rand() % 1000;
+        pl.point.y = rand() % 1000;
+        std::cout << "generated payload " << pl.data << " at (" << pl.point.x << "|" << pl.point.y << ")" << std::endl;
+        tree->addPayload(pl);
     }
     
 
    //QuadTreeNode<char> qtn = new QuadTreeNode<char>()
     std::cout << RootLocation.opBorder.min_x << std::endl;
-
 
     std::cout << "Hello World!\n";
 }
