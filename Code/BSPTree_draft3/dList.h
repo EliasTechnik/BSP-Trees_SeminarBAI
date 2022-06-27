@@ -3,6 +3,13 @@
 #include "helpers.h"
 
 template <class Payload>
+struct dListSerchResult {
+	bool succes;
+	unsigned int index;
+	Payload item;	
+};
+
+template <class Payload>
 class dList {//a semidynamic list of pointers 
 private:
 	Payload* items; //pointer to the first item in memory
@@ -16,21 +23,24 @@ public:
 	unsigned int addItem(Payload item); //adds one Item to the list
 	Payload* getItemPointer(unsigned int index); //get Pointer to Item at position x
 	Payload getItem(unsigned int index); //get Item at position x
-	unsigned int findItem(Payload item); //returns the index if found or NULL
+	dListSerchResult<Payload> findItem(Payload item); //returns the index if found or NULL
 	unsigned int getItemCount() { return Count; }; //count of items
 	void clear(); //clears the list and releases memory without destroing the instance
+	void deleteItem(unsigned int index); //deletes the item located at this index
 };
 
 template <class Payload>
 dList<Payload>::dList(unsigned int size) {
 	this->Count = 0;
 	this->stepSize = size;
-	realloc_mem(this->stepSize);
+	this->items = new Payload[this->stepSize];
+	this->allocSize = size;
+	//log("Created dList.");
 }
 
 template<class Payload>
 dList<Payload>::~dList(){
-	log("dlist deconstructor called.");
+	//log("dlist deconstructor called.");
 	delete[] this->items; //free ocupied memory
 }
 
@@ -57,7 +67,7 @@ unsigned int dList<Payload>::addItem(Payload item) {
 template <class Payload>
 Payload* dList<Payload>::getItemPointer(unsigned int index) {
 	if (index >= Count) {
-		return NULL;
+		throw "Index out of Bounds";
 	}
 	else {
 		return &this->items[index];
@@ -75,13 +85,18 @@ Payload dList<Payload>::getItem(unsigned int index) {
 }
 
 template <class Payload>
-unsigned int dList<Payload>::findItem(Payload item) {
+dListSerchResult<Payload> dList<Payload>::findItem(Payload item) {
+	dListSerchResult<Payload> result;
+	result.succes = false;
+	result.item = item;
 	for (unsigned int i = 0; i < this->Count; i++) {
-		if (this->items[i] == item) {
-			return i;
+		if (&(this->items[i]) == &item) {
+			result.succes = true;
+			result.index = i;
+			return result;
 		}
 	}
-	return NULL;
+	return result;
 }
 
 template<class Payload>
@@ -93,4 +108,15 @@ void dList<Payload>::clear()
 	this->allocSize = this->stepSize;
 	this->Count = 0;
 
+}
+
+template<class Payload>
+void dList<Payload>::deleteItem(unsigned int index)
+{
+	if (index >= this->Count) {
+		throw "dList: Index out of bounds.";
+    }
+	else {
+		//delete this->items[index];
+	}
 }
