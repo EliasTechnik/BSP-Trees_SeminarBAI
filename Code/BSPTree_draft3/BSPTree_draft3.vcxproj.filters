@@ -32,5 +32,8 @@
     <ClInclude Include="helpers.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="OcTreeTemplate.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -5,79 +5,17 @@
 #include <string>
 #include "TreeNode.h"
 #include "QuadTreeTemplate.h"
+#include "OcTreeTemplate.h"
 
 //for testing
 #include "dList.h"
 
-class A {
-private:
-    int data;
-public:
-    A(int _data) {
-        data = _data;
-    };
-    A() { //default constructor
-        data = 0;
-    }
-    ~A() {
-        data = 0;
-    };
-    int getData() {
-        return data;
-    }
-    void setData(int _data) {
-        data = _data;
-    }
-};
-
-
-int main()
-{
-    //Testing dList
-    /*
-    dList<int> * list = new dList<int>(500);
-
-    for (int i = 0; i < 1000000; i++) {
-        list->addItem(rand() % 1000);
-        //std::cout << "added item " << i << " to the list" << std::endl;
-    }
-
-    for (unsigned int i = 0; i < list->getItemCount(); i++) {
-        int a = list->getItem(i);
-        //std::cout << "got item " << a << " from the list" << std::endl;
-    }
-    delete list;
-
-    std::cout << "Press Enter to continue..." << std::endl;
-    std::cin.get();
-    list = new dList<int>(500);
-
-
-    for (int i = 0; i < 1000000; i++) {
-        list->addItem(rand() % 1000);
-        //std::cout << "added item " << i << " to the list" << std::endl;
-    }
-    delete list;
-    std::cout << "Press Enter to continue..." << std::endl;
-    std::cin.get();
-    */
-    
-    //testing delete on dlist
-    /*
-    dList<A> * list = new dList<A>(4);
-
-    for (unsigned int i = 0; i < 100; i++) {
-        A a = A(i);
-        list->addItem(a);
-    }
-
-    A a = list->getItem(0);
-    a.setData(7);
-    delete list;
-    
-    */
-
-    
+//compareMethod
+bool intCompare(PLPackage<int, QTLocation> a, PLPackage<int, QTLocation> b) {
+    return a.data == b.data;
+}
+ 
+void memTest(unsigned int count, unsigned int repeats) {
     NLPackage<QTLocation, QTOperationBorder> RootLocation;
     RootLocation.opBorder.min_x = 0;
     RootLocation.opBorder.min_y = 0;
@@ -85,67 +23,240 @@ int main()
     RootLocation.opBorder.max_y = 1000;
     RootLocation.nodeLoc = getQTNodeLocation(RootLocation.opBorder);
 
-    BSPTreeNode<int, QTLocation, QTLocation, QTOperationBorder, 4> * tree = new BSPTreeNode<int, QTLocation, QTLocation, QTOperationBorder, 4>(
+    BSPTreeNode<int, QTLocation, QTLocation, QTOperationBorder, 4>* tree = new BSPTreeNode<int, QTLocation, QTLocation, QTOperationBorder, 4>(
         4,
         RootLocation,
         getQTFPackage()
         );
 
-    std::cout << "Delete Tree:\n";
-    delete tree;
-    std::cout << "Press Enter to continue..." << std::endl;
-    std::cin.get();
-    tree = new BSPTreeNode<int, QTLocation, QTLocation, QTOperationBorder, 4>(
-        4,
-        RootLocation,
-        getQTFPackage()
-        );
+    dList<PLPackage<int, QTLocation>>* plist = new dList<PLPackage<int, QTLocation>>(count);
 
-    //dList<PLPackage<int, QTLocation>>* plist = new dList<PLPackage<int, QTLocation>>(5);
-    for (int i = 0; i < 1000; i++) {
+    //create test data dataset
+    for (unsigned int i = 0; i < count; i++) {
         int number = i;
         PLPackage<int, QTLocation> pl;
         pl.data = i;
         pl.point.x = rand() % 1000;
         pl.point.y = rand() % 1000;
-        std::cout << "generated payload " << pl.data << " at (" << pl.point.x << "|" << pl.point.y << ")" << std::endl;
-        tree->addPayload(pl);
-        //plist->addItem(pl);
+        //std::cout << "generated payload " << pl.data << " at (" << pl.point.x << "|" << pl.point.y << ")" << std::endl;
+        plist->addItem(pl);
     }
-    /*
-    for (int i = 0; i < 5; i++) {
-        //BSPTreeNode<int, QTLocation, QTLocation, QTOperationBorder, 4> * n = tree->getNodeToPayload(plist->getItem(i));
-        NLPackage<QTLocation, QTOperationBorder> r = tree->getNodeLocation();
-        std::cout << "got node Location for Payload " << i << " at (" << r.nodeLoc.x << "|" << r.nodeLoc.y << ")" << std::endl;
-    } */
-    std::cout << "Press Enter to continue..." << std::endl;
-    std::cin.get();
+
     
-    std::cout << "Delete Tree:\n";
-    delete tree;
+    for (unsigned int j = 0; j < repeats; j++) {
+        std::cout << "Press Enter to continue..." << std::endl;
+        std::cin.get();
+        tree = new BSPTreeNode<int, QTLocation, QTLocation, QTOperationBorder, 4>(
+            4,
+            RootLocation,
+            getQTFPackage()
+            );
+        for (unsigned int i = 0; i < count; i++) {
+            PLPackage<int, QTLocation> pl = plist->getItem(i);
+            //std::cout << "generated payload " << pl.data << " at (" << pl.point.x << "|" << pl.point.y << ")" << std::endl;
+            tree->addPayload(pl);
+        }
+        std::cout << "Press Enter to continue..." << std::endl;
+        std::cin.get();
+        delete tree;
+    }
+}
+
+void deleteAndCleanupTest() {
+    NLPackage<QTLocation, QTOperationBorder> RootLocation;
+    RootLocation.opBorder.min_x = 0;
+    RootLocation.opBorder.min_y = 0;
+    RootLocation.opBorder.max_x = 1000;
+    RootLocation.opBorder.max_y = 1000;
+    RootLocation.nodeLoc = getQTNodeLocation(RootLocation.opBorder);
+
+    BSPTreeNode<int, QTLocation, QTLocation, QTOperationBorder, 4>* tree = new BSPTreeNode<int, QTLocation, QTLocation, QTOperationBorder, 4>(
+        4,
+        RootLocation,
+        getQTFPackage()
+        );
+
+    dList<PLPackage<int, QTLocation>>* plist = new dList<PLPackage<int, QTLocation>>(5);
+    dList<PLPackage<int, QTLocation>>* clist = new dList<PLPackage<int, QTLocation>>(5);
+    //create custom data dataset
+    PLPackage<int, QTLocation> pl;
+    pl.data = 0;
+    pl.point.x = 200;
+    pl.point.y = 200;
+    clist->addItem(pl);
+    pl.data = 1;
+    pl.point.x = 201;
+    pl.point.y = 201;
+    clist->addItem(pl);
+    pl.data = 2;
+    pl.point.x = 202;
+    pl.point.y = 202;
+    clist->addItem(pl);
+    pl.data = 3;
+    pl.point.x = 203;
+    pl.point.y = 203;
+    clist->addItem(pl);
+    pl.data = 4;
+    pl.point.x = 700;
+    pl.point.y = 200;
+    clist->addItem(pl);
+    std::cout << "cList Itemcount: " << clist->getItemCount() << std::endl;
+    for (unsigned int i = 0; i < clist->getItemCount(); i++) {
+        tree->addPayload(clist->getItem(i));
+    }
+    for (unsigned int i = 0; i < clist->getItemCount(); i++) {
+        BSPTreeNode<int, QTLocation, QTLocation, QTOperationBorder, 4>* node = tree->getNodeToLocation(clist->getItem(i).point);
+        std::cout << "PayloadCount in Child " << node->getNodeLocation().childID << " at level " << node->getNodeLocation().level << ": " << node->getNodePayloadCount() << std::endl;
+    }
+    std::cout << "Items in Tree: " << tree->getTreePayloadCount() << std::endl;
     std::cout << "Press Enter to continue..." << std::endl;
     std::cin.get();
+    BSPTreeNode<int, QTLocation, QTLocation, QTOperationBorder, 4>* node = tree->getNodeToLocation(clist->getItem(4).point);
+    node->deletePayload(0);
+    tree->cleanupTree();
+
+    for (unsigned int i = 0; i < clist->getItemCount(); i++) {
+        BSPTreeNode<int, QTLocation, QTLocation, QTOperationBorder, 4>* node = tree->getNodeToLocation(clist->getItem(i).point);
+        std::cout << "PayloadCount in Child " << node->getNodeLocation().childID << " at level " << node->getNodeLocation().level << ": " << node->getNodePayloadCount() << std::endl;
+    }
+    std::cout << "Items in Tree: " << tree->getTreePayloadCount() << std::endl;
+    std::cout << "Press Enter to continue..." << std::endl;
+    std::cin.get();
+
+
+    delete tree;
     tree = new BSPTreeNode<int, QTLocation, QTLocation, QTOperationBorder, 4>(
         4,
         RootLocation,
         getQTFPackage()
         );
 
-    for (int i = 0; i < 1000; i++) {
+
+
+
+    //create test data dataset
+    for (unsigned int i = 0; i < 5; i++) {
         int number = i;
         PLPackage<int, QTLocation> pl;
         pl.data = i;
         pl.point.x = rand() % 1000;
         pl.point.y = rand() % 1000;
-        std::cout << "generated payload " << pl.data << " at (" << pl.point.x << "|" << pl.point.y << ")" << std::endl;
+        //std::cout << "generated payload " << pl.data << " at (" << pl.point.x << "|" << pl.point.y << ")" << std::endl;
+        plist->addItem(pl);
         tree->addPayload(pl);
     }
+    std::cout << "Items in Tree: " << tree->getTreePayloadCount() << std::endl;
     std::cout << "Press Enter to continue..." << std::endl;
     std::cin.get();
 
-    std::cout << "Delete Tree:\n";
+    unsigned int missing = 0;
+
+    for (unsigned int i = 0; i < 5; i++) {
+        BSPTreeNode<int, QTLocation, QTLocation, QTOperationBorder, 4>* node = tree->getNodeToLocation(plist->getItem(i).point);
+        if (node == nullptr) {
+            log("Node to Location not found.");
+            missing++;
+        }
+        else {
+            std::cout << "PayloadCount in Child : " << node->getNodePayloadCount() << std::endl;
+        }
+
+    }
+    std::cout << "Missing: " << missing << std::endl;
+
+    std::cout << "Press Enter to continue..." << std::endl;
+    std::cin.get();
+
+    missing = 0;
+    for (unsigned int i = 0; i < 5; i++) {
+        BSPTreeNode<int, QTLocation, QTLocation, QTOperationBorder, 4>* node = tree->getNodeToPayload(plist->getItem(i), intCompare);
+        if (node == nullptr) {
+            log("Node to Payload not found.");
+            missing++;
+        }
+        else {
+            std::cout << "PayloadCount in Child : " << node->getNodePayloadCount() << std::endl;
+        }
+
+    }
+    std::cout << "Missing: " << missing << std::endl;
     delete tree;
+}
+
+void OcTreeTest() {
+    //setup of the Space and the startlocation
+    NLPackage<OCTLocation, OCTOperationBorder> root;
+    root.opBorder.max_x = 1000;
+    root.opBorder.max_y = 1000;
+    root.opBorder.max_z = 1000;
+    root.nodeLoc = getOCTNodeLocation(root.opBorder);
+    printOCTLocation(root.nodeLoc, root.nodeLoc);
+
+    //initialisation of the root node
+    BSPTreeNode<int, OCTLocation, OCTLocation, OCTOperationBorder, 8> *OcTree = new BSPTreeNode<int, OCTLocation, OCTLocation, OCTOperationBorder, 8>(
+        2,
+        root,
+        getOCTFPackage()
+        );
+
+    //define Payload Package
+    PLPackage<int, OCTLocation> pl;
+    /*
+    pl.data = 0;
+    pl.point.x = 1;
+    pl.point.y = 1;
+    pl.point.z = 1;
+    OcTree->addPayload(pl);
+    pl.data = 1;
+    pl.point.x = 2;
+    pl.point.y = 2;
+    pl.point.z = 2;
+    OcTree->addPayload(pl);
+    pl.data = 2;
+    pl.point.x = 3;
+    pl.point.y = 3;
+    pl.point.z = 3;
+    OcTree->addPayload(pl);
+    pl.data = 3;
+    pl.point.x = 4;
+    pl.point.y = 4;
+    pl.point.z = 4;
+    OcTree->addPayload(pl);
+    */
+    
+    for(unsigned int i=0; i<100;i++){
+        pl.data = i;
+        pl.point.x = rand() % 1000;
+        pl.point.y = rand() % 1000;
+        pl.point.z = rand() % 1000;
+        std::cout << "generated payload " << pl.data << " at (" << pl.point.x << "|" << pl.point.y << "|" << pl.point.z <<")" << std::endl;
+        if (OCTOutOfBoundsFunction(root.opBorder, pl.point)) {
+            log("pl out of bounds!");
+        }
+        
+        OcTree->addPayload(pl);
+    }
+    
+    std::cout << "Press Enter to continue..." << std::endl;
+    std::cin.get();
+    delete OcTree;
+
+}
+
+
+int main()
+{
+    
+
+    
+    memTest(10000, 10);
+
+    
+
+    //OcTreeTest();
     std::cout << "Hello World!\n";
+    std::cout << "Press Enter to continue..." << std::endl;
+    std::cin.get();
 }
 
 // Programm ausführen: STRG+F5 oder Menüeintrag "Debuggen" > "Starten ohne Debuggen starten"

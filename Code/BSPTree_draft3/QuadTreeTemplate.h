@@ -6,16 +6,16 @@
 
 //Location (for the Quadtree this is also NodeLocation)
 struct QTLocation {
-	double x;
-	double y;
+	double x = 0;
+	double y = 0;
 };
 
 //OperationBorder
 struct QTOperationBorder {	
-	double min_x;
-	double max_x;
-	double min_y;
-	double max_y;
+	double min_x = 0;
+	double max_x = 0;
+	double min_y = 0;
+	double max_y = 0;
 };
 
 void printQTLocation(QTLocation payload, QTLocation node) {	 //for debgging
