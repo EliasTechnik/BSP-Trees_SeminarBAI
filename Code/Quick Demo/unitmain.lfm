@@ -1,19 +1,20 @@
 object formmain: Tformmain
-  Left = 2007
-  Height = 425
-  Top = 252
-  Width = 555
+  Left = 546
+  Height = 531
+  Top = 250
+  Width = 694
   Caption = 'Quadtree Demo'
-  ClientHeight = 405
-  ClientWidth = 555
+  ClientHeight = 506
+  ClientWidth = 694
+  DesignTimePPI = 120
   Menu = mm
   OnCreate = FormCreate
-  LCLVersion = '2.2.2.0'
+  LCLVersion = '2.2.0.4'
   object parea: TPaintBox
     Left = 0
-    Height = 382
+    Height = 477
     Top = 0
-    Width = 555
+    Width = 694
     Align = alClient
     OnMouseDown = pareaMouseDown
     OnMouseMove = pareaMouseMove
@@ -21,22 +22,22 @@ object formmain: Tformmain
   end
   object sb: TStatusBar
     Left = 0
-    Height = 23
-    Top = 382
-    Width = 555
+    Height = 29
+    Top = 477
+    Width = 694
     Panels = <    
       item
         Text = 'Max Depth: 0'
-        Width = 150
+        Width = 188
       end    
       item
-        Width = 50
+        Width = 62
       end>
     SimplePanel = False
   end
   object mm: TMainMenu
-    Left = 88
-    Top = 59
+    Left = 110
+    Top = 74
     object mi_file: TMenuItem
       Caption = 'File'
       object mi_save_picture: TMenuItem

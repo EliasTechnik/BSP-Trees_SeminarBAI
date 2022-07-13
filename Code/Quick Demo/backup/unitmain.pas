@@ -83,7 +83,7 @@ begin
  doPaint:=false;
  def_dot.fillcolor:=rgbtocolor(200,0,0);
  def_dot.outline:=rgbtocolor(0,0,0);
- def_dot.diameter:=15;
+ def_dot.diameter:=8;
  maxitems:=4;
  parea.Canvas.AntialiasingMode:=amOn;
  randomize();

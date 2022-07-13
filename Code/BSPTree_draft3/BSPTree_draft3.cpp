@@ -243,18 +243,55 @@ void OcTreeTest() {
 
 }
 
+void QTdemo() {
+    NLPackage<QTLocation, QTOperationBorder> RootLocation;
+    RootLocation.opBorder.min_x = 0;
+    RootLocation.opBorder.min_y = 0;
+    RootLocation.opBorder.max_x = 1000;
+    RootLocation.opBorder.max_y = 1000;
+    RootLocation.nodeLoc = getQTNodeLocation(RootLocation.opBorder);
+
+    BSPTreeNode<int, QTLocation, QTLocation, QTOperationBorder, 4>* tree = new BSPTreeNode<int, QTLocation, QTLocation, QTOperationBorder, 4>(
+        2,
+        RootLocation,
+        getQTFPackage()
+        );
+
+    dList<PLPackage<int, QTLocation>>* plist = new dList<PLPackage<int, QTLocation>>(10);
+
+    for (unsigned int i = 0; i < 10; i++) {
+        PLPackage<int, QTLocation> pl;
+        pl.data = i;
+        pl.point.x = rand() % 1000;
+        pl.point.y = rand() % 1000;
+        plist->addItem(pl);
+        tree->addPayload(pl);
+        std::cout << "generated payload " << pl.data << " at (" << pl.point.x << "|" << pl.point.y << ")" << std::endl;
+    }
+    for (unsigned int i = 0; i < 10; i++) {
+        BSPTreeNode<int, QTLocation, QTLocation, QTOperationBorder, 4>* node = tree->getNodeToLocation(plist->getItem(i).point);
+        PLPackage<int, QTLocation> pl = plist->getItem(i);
+        if (node == nullptr) {
+            log("Node to Location not found.");
+        }
+        else {
+            std::cout << "Node to Payload (" << pl.point.x << "|" << pl.point.y <<") found at Level "<< node->getNodeLocation().level << " with ChildID "<< node->getNodeLocation().childID <<". "
+                << node->getNodePayloadCount() << " Nodes are stored in this Node" <<std::endl;
+        }
+    }
+
+}
 
 int main()
 {
     
 
     
-    memTest(10000, 10);
-
-    
+    //memTest(10000, 10);
+    //deleteAndCleanupTest();
+    QTdemo();
 
     //OcTreeTest();
-    std::cout << "Hello World!\n";
     std::cout << "Press Enter to continue..." << std::endl;
     std::cin.get();
 }
