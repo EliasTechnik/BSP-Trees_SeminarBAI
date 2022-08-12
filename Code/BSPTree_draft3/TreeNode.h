@@ -60,6 +60,26 @@ void printNodeState(BSPTreeNodeState state) {
 	}
 }
 
+template <class Payload, class Location, class NodeLocation, class OperationBorder, unsigned int degree>
+class BSPTreeNodeRoot {
+private: 
+	FPackage<Location, NodeLocation, OperationBorder> customFunctions; //Function Pointer Package
+	unsigned int payloadLimit;
+protected:
+	BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>* childs;	//array which holds child nodes	//created once at subdivide()
+	dList<PLPackage<Payload, Location>>* nodePayload;  //althougth the size is dynamic, it gets initialized to hold only PayloadLimit
+	NLPackage<NodeLocation, OperationBorder> nodeLoc; //this can be a point, a plane or a room, the node does not care
+	BSPTreeNodeState nodeState;		//current state of the node
+	void subdivide(); //subdivides the node
+	bool addItemToChild(PLPackage<Payload, Location> p);
+public:
+	BSPTreeNodeRoot();
+	BSPTreeNodeRoot(
+		unsigned int _PayloadLimit,
+		NLPackage<NodeLocation, OperationBorder> _NodeLoc,
+		FPackage<Location, NodeLocation, OperationBorder> _customFunctions);	//Root Constructor
+	~BSPTreeNodeRoot(); //Destructor of the root or whole tree
+};
 
 template <class Payload, class Location, class NodeLocation, class OperationBorder, unsigned int degree>
 class BSPTreeNode {
