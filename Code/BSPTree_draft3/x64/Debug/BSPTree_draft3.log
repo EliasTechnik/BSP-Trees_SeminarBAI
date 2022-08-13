@@ -1,3 +1,106 @@
 ﻿  BSPTree_draft3.cpp
-C:\Users\Elias Wagner\Desktop\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(262): warning C4715: "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>::getNodeToPayload": Nicht alle Codepfade geben einen Wert zurück.
-  BSPTree_draft3.vcxproj -> C:\Users\Elias Wagner\Desktop\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\x64\Debug\BSPTree_draft3.exe
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(69,13): error C2143: Syntaxfehler: Es fehlt ";" vor "<"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(106): message : Siehe Verweis auf die gerade kompilierte Klasse Vorlage-Instanziierung "BSPTree<Payload,Location,NodeLocation,OperationBorder,degree>".
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(69,1): error C4430: Fehlender Typspezifizierer - int wird angenommen. Hinweis: "default-int" wird von C++ nicht unterstützt.
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(69,64): error C2238: Unerwartete(s) Token vor ";"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(73,13): error C2143: Syntaxfehler: Es fehlt ";" vor "*"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(73,1): error C4430: Fehlender Typspezifizierer - int wird angenommen. Hinweis: "default-int" wird von C++ nicht unterstützt.
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(73,1): error C2238: Unerwartete(s) Token vor ";"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(86,13): error C2143: Syntaxfehler: Es fehlt ";" vor "*"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(86,1): error C4430: Fehlender Typspezifizierer - int wird angenommen. Hinweis: "default-int" wird von C++ nicht unterstützt.
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(86,1): error C2238: Unerwartete(s) Token vor ";"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(88,13): error C2143: Syntaxfehler: Es fehlt ";" vor "*"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(88,1): error C4430: Fehlender Typspezifizierer - int wird angenommen. Hinweis: "default-int" wird von C++ nicht unterstützt.
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(88,1): error C2238: Unerwartete(s) Token vor ";"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(89,13): error C2143: Syntaxfehler: Es fehlt ";" vor "*"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(89,1): error C4430: Fehlender Typspezifizierer - int wird angenommen. Hinweis: "default-int" wird von C++ nicht unterstützt.
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(89,1): error C2238: Unerwartete(s) Token vor ";"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(99,13): error C2143: Syntaxfehler: Es fehlt ";" vor "*"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(99,1): error C4430: Fehlender Typspezifizierer - int wird angenommen. Hinweis: "default-int" wird von C++ nicht unterstützt.
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(99,1): error C2238: Unerwartete(s) Token vor ";"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(109,1): error C2955: "BSPTree" : Für die Verwendung von Klasse Vorlage ist eine Vorlage-Argumentliste erforderlich
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(64): message : Siehe Deklaration von "BSPTree"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(126): message : Siehe Verweis auf die gerade kompilierte Klasse Vorlage-Instanziierung "BSPTreeNode<Payload,Location,NodeLocation,OperationBorder,degree>".
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(125,1): error C2535: "void BSPTreeNode<Payload,Location,NodeLocation,OperationBorder,degree>::setParent(BSPTreeNode<Payload,Location,NodeLocation,OperationBorder,degree> *)": Memberfunktion bereits definiert oder deklariert
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(122): message : Siehe Deklaration von "BSPTreeNode<Payload,Location,NodeLocation,OperationBorder,degree>::setParent"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(164,2): error C3861: "childs": Bezeichner wurde nicht gefunden.
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(244,68): error C2039: "getChild" ist kein Member von "BSPTree<Payload,Location,NodeLocation,OperationBorder,degree>".
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(245,1): error C2447: "{": Funktionsheader fehlt - Parameterliste im alten Stil?
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(257,68): error C2039: "getParent" ist kein Member von "BSPTree<Payload,Location,NodeLocation,OperationBorder,degree>".
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(258,1): error C2447: "{": Funktionsheader fehlt - Parameterliste im alten Stil?
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(265,68): error C2039: "getNodeToPayload" ist kein Member von "BSPTree<Payload,Location,NodeLocation,OperationBorder,degree>".
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(268,1): error C2447: "{": Funktionsheader fehlt - Parameterliste im alten Stil?
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(296,68): error C2039: "getNodeToLocation" ist kein Member von "BSPTree<Payload,Location,NodeLocation,OperationBorder,degree>".
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(297,1): error C2447: "{": Funktionsheader fehlt - Parameterliste im alten Stil?
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(567,1): error C2244: "BSPTreeNode<Payload,Location,NodeLocation,OperationBorder,degree>::setParent": Keine Übereinstimmung für Funktionsdefinition mit vorhandener Deklaration gefunden
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(566): message : Siehe Deklaration von "BSPTreeNode<Payload,Location,NodeLocation,OperationBorder,degree>::setParent"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(567,1): message : Definition
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(567,1): message : 'void BSPTreeNode<Payload,Location,NodeLocation,OperationBorder,degree>::setParent(BSPTree<Payload,Location,NodeLocation,OperationBorder,degree> *)'
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(567,1): message : Vorhandene Deklarationen
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(567,1): message : 'void BSPTreeNode<Payload,Location,NodeLocation,OperationBorder,degree>::setParent(BSPTreeNode<Payload,Location,NodeLocation,OperationBorder,degree> *)'
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(575,72): error C2039: "getRoot" ist kein Member von "BSPTreeNode<Payload,Location,NodeLocation,OperationBorder,degree>".
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(576,1): error C2447: "{": Funktionsheader fehlt - Parameterliste im alten Stil?
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(125,1): error C2535: "void BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>::setParent(BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4> *)": Memberfunktion bereits definiert oder deklariert
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(122): message : Siehe Deklaration von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>::setParent"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(26,142): error C2661: "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>::BSPTreeNode": Keine überladene Funktion akzeptiert 3 Argumente
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(49,82): error C2661: "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>::BSPTreeNode": Keine überladene Funktion akzeptiert 3 Argumente
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(57,19): error C2039: "addPayload" ist kein Member von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>".
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(26): message : Siehe Deklaration von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(73,142): error C2661: "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>::BSPTreeNode": Keine überladene Funktion akzeptiert 3 Argumente
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(105,15): error C2039: "addPayload" ist kein Member von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>".
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(26): message : Siehe Deklaration von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(108,86): error C2039: "getNodeToLocation" ist kein Member von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>".
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(26): message : Siehe Deklaration von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(109,56): error C2039: "getNodeLocation" ist kein Member von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>".
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(26): message : Siehe Deklaration von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(109,107): error C2039: "getNodeLocation" ist kein Member von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>".
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(26): message : Siehe Deklaration von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(109,148): error C2039: "getNodePayloadCount" ist kein Member von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>".
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(26): message : Siehe Deklaration von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(111,45): error C2039: "getTreePayloadCount" ist kein Member von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>".
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(26): message : Siehe Deklaration von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(114,82): error C2039: "getNodeToLocation" ist kein Member von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>".
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(26): message : Siehe Deklaration von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(115,11): error C2039: "deletePayload" ist kein Member von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>".
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(26): message : Siehe Deklaration von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(116,11): error C2039: "cleanupTree" ist kein Member von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>".
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(26): message : Siehe Deklaration von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(119,86): error C2039: "getNodeToLocation" ist kein Member von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>".
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(26): message : Siehe Deklaration von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(120,56): error C2039: "getNodeLocation" ist kein Member von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>".
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(26): message : Siehe Deklaration von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(120,107): error C2039: "getNodeLocation" ist kein Member von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>".
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(26): message : Siehe Deklaration von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(120,148): error C2039: "getNodePayloadCount" ist kein Member von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>".
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(26): message : Siehe Deklaration von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(122,45): error C2039: "getTreePayloadCount" ist kein Member von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>".
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(26): message : Siehe Deklaration von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(128,78): error C2661: "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>::BSPTreeNode": Keine überladene Funktion akzeptiert 3 Argumente
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(146,15): error C2039: "addPayload" ist kein Member von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>".
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(26): message : Siehe Deklaration von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(148,45): error C2039: "getTreePayloadCount" ist kein Member von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>".
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(26): message : Siehe Deklaration von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(155,86): error C2039: "getNodeToLocation" ist kein Member von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>".
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(26): message : Siehe Deklaration von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(161,62): error C2039: "getNodePayloadCount" ist kein Member von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>".
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(26): message : Siehe Deklaration von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(172,86): error C2039: "getNodeToPayload" ist kein Member von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>".
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(26): message : Siehe Deklaration von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(178,62): error C2039: "getNodePayloadCount" ist kein Member von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>".
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(26): message : Siehe Deklaration von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(125,1): error C2535: "void BSPTreeNode<int,OCTLocation,OCTLocation,OCTOperationBorder,8>::setParent(BSPTreeNode<int,OCTLocation,OCTLocation,OCTOperationBorder,8> *)": Memberfunktion bereits definiert oder deklariert
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(122): message : Siehe Deklaration von "BSPTreeNode<int,OCTLocation,OCTLocation,OCTOperationBorder,8>::setParent"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(196,150): error C2661: "BSPTreeNode<int,OCTLocation,OCTLocation,OCTOperationBorder,8>::BSPTreeNode": Keine überladene Funktion akzeptiert 3 Argumente
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(237,17): error C2039: "addPayload" ist kein Member von "BSPTreeNode<int,OCTLocation,OCTLocation,OCTOperationBorder,8>".
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(196): message : Siehe Deklaration von "BSPTreeNode<int,OCTLocation,OCTLocation,OCTOperationBorder,8>"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(254,142): error C2661: "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>::BSPTreeNode": Keine überladene Funktion akzeptiert 3 Argumente
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(268,15): error C2039: "addPayload" ist kein Member von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>".
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(26): message : Siehe Deklaration von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(272,86): error C2039: "getNodeToLocation" ist kein Member von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>".
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(26): message : Siehe Deklaration von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(278,111): error C2039: "getNodeLocation" ist kein Member von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>".
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(26): message : Siehe Deklaration von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(278,163): error C2039: "getNodeLocation" ist kein Member von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>".
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(26): message : Siehe Deklaration von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>"
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(279,26): error C2039: "getNodePayloadCount" ist kein Member von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>".
+I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\BSPTree_draft3.cpp(26): message : Siehe Deklaration von "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>"
