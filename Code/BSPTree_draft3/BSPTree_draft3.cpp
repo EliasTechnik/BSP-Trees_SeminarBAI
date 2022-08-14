@@ -288,8 +288,8 @@ int main()
 
     
     //memTest(10000, 10);
-    //deleteAndCleanupTest();
-    QTdemo();
+    deleteAndCleanupTest();
+    //QTdemo();
 
     //OcTreeTest();
     std::cout << "Press Enter to continue..." << std::endl;
