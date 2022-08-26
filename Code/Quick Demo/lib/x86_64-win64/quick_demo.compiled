@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CONFIG>
-  <Compiler Value="C:\lazarus\fpc\3.2.2\bin\x86_64-win64\fpc.exe" Date="1411537227"/>
-  <Params Value=" -MObjFPC -Scghi -O1 -gw2 -godwarfsets -gl -WG -l -vewnhibq &quot;-FiC:\Users\Elias Wagner\Desktop\BSP-Trees_SeminarBAI\Code\Quick Demo\lib\x86_64-win64&quot; -FuC:\lazarus\lcl\units\x86_64-win64\win32 -FuC:\lazarus\lcl\units\x86_64-win64 -FuC:\GitHubWorkfolder\GraphRenderer\GraphRenderPrototyp2\lib\bgrabitmap-11.5\bgrabitmap\lib4nogui\x86_64-win64\3.2.2 -FuC:\lazarus\components\freetype\lib\x86_64-win64 -FuC:\lazarus\components\lazutils\lib\x86_64-win64 -FuC:\lazarus\packager\units\x86_64-win64 &quot;-FuC:\Users\Elias Wagner\Desktop\BSP-Trees_SeminarBAI\Code\Quick Demo\&quot; &quot;-FUC:\Users\Elias Wagner\Desktop\BSP-Trees_SeminarBAI\Code\Quick Demo\lib\x86_64-win64\&quot; &quot;-FEC:\Users\Elias Wagner\Desktop\BSP-Trees_SeminarBAI\Code\Quick Demo\&quot; &quot;-oC:\Users\Elias Wagner\Desktop\BSP-Trees_SeminarBAI\Code\Quick Demo\quick_demo.exe&quot; -dLCL -dLCLwin32 quick_demo.lpr"/>
-</CONFIG>

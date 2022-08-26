@@ -20,9 +20,8 @@
         <ComponentName Value="formmain"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
         <TopLine Value="64"/>
-        <CursorPos X="31" Y="80"/>
+        <CursorPos X="41" Y="77"/>
         <UsageCount Value="29"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -30,8 +29,8 @@
       <Unit>
         <Filename Value="unit_quadtree.pas"/>
         <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="334"/>
         <CursorPos X="22" Y="362"/>
         <UsageCount Value="29"/>
         <Loaded Value="True"/>

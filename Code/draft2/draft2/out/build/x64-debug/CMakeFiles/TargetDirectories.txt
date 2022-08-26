@@ -1,3 +1,0 @@
-C:/GitHubWorkfolder/BSP-Trees_SeminarBAI/Code/draft2/draft2/out/build/x64-debug/CMakeFiles/draft2.dir
-C:/GitHubWorkfolder/BSP-Trees_SeminarBAI/Code/draft2/draft2/out/build/x64-debug/CMakeFiles/edit_cache.dir
-C:/GitHubWorkfolder/BSP-Trees_SeminarBAI/Code/draft2/draft2/out/build/x64-debug/CMakeFiles/rebuild_cache.dir

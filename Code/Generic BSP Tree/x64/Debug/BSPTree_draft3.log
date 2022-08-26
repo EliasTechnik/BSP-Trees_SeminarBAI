@@ -1,0 +1,3 @@
+﻿  BSPTree_draft3.cpp
+C:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\Generic BSP Tree\TreeNode.h(262): warning C4715: "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>::getNodeToPayload": Nicht alle Codepfade geben einen Wert zurück.
+  BSPTree_draft3.vcxproj -> C:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\Generic BSP Tree\x64\Debug\BSPTree_draft3.exe
