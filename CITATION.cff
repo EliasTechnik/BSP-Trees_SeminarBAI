@@ -2,12 +2,14 @@
 # Visit https://bit.ly/cffinit to generate yours today!
 
 cff-version: 1.2.0
-title: Generic Binary Space Partition Tree
+title: Binary Space Partition Tree
 message: >-
   If you use this software, please cite it using the
   metadata from this file.
 type: software
 authors:
-  - family-names: Wagner
+  - given-names: Elias
+    family-names: Wagner
     name-suffix: Elias
     email: mail@elias-wagner.de
+    affiliation: TU Bergakademie Freiberg
