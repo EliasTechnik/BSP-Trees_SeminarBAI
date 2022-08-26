@@ -94,7 +94,7 @@ public:
 	dList<PLPackage<Payload, Location>>* getPayload(); //gethers all payload under this node;
 	unsigned int getNodePayloadCount();
 	unsigned int getTreePayloadCount(unsigned int offset=0);
-	bool deletePayload(unsigned int index); //true if the Payload was deleted //issues cleanup
+	bool deletePayload(unsigned int index); //true if the Payload was deleted
 	BSPTreeNode* getRoot();
 	void clean(); //deletes payload and child from the bottom up
 	void removeChilds(); //removes childs under that node and converts it to sLeaf
@@ -285,6 +285,7 @@ BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::getNodeTo
 template<class Payload, class Location, class NodeLocation, class OperationBorder, unsigned int degree>
 bool BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::addPayload(PLPackage<Payload, Location> p)
 {
+	//check if we have to create the payload list and change state to leaf
 	if ((this->nodeState == BSPTreeNodeState::sEmpty) || (this->nodeState == BSPTreeNodeState::sEmptyConfigured)) {
 		this->nodePayload = new dList<PLPackage<Payload, Location>>(payloadLimit);
 		this->nodeState = BSPTreeNodeState::sLeaf;
@@ -302,7 +303,7 @@ bool BSPTreeNode<Payload, Location, NodeLocation, OperationBorder, degree>::addP
 		}
 		else {
 			log("addPayload: Item out of bounds.");
-			return false; //We return false because ther is no parent and the bounds are exceded for that item
+			return false; //We return false because there is no parent and the bounds are exceded for that item
 		}
 	}
 	else {

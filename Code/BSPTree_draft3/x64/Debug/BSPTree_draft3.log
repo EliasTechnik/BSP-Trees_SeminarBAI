@@ -1,3 +1,4 @@
 ﻿  BSPTree_draft3.cpp
-I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(262): warning C4715: "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>::getNodeToPayload": Nicht alle Codepfade geben einen Wert zurück.
-  BSPTree_draft3.vcxproj -> I:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\x64\Debug\BSPTree_draft3.exe
+C:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\TreeNode.h(262): warning C4715: "BSPTreeNode<int,QTLocation,QTLocation,QTOperationBorder,4>::getNodeToPayload": Nicht alle Codepfade geben einen Wert zurück.
+  LINK : C:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\x64\Debug\BSPTree_draft3.exe wurde nicht gefunden oder beim letzten inkrementellen Linkvorgang nicht erstellt; vollständiger Link wird durchgeführt.
+  BSPTree_draft3.vcxproj -> C:\GitHubWorkfolder\BSP-Trees_SeminarBAI\Code\BSPTree_draft3\x64\Debug\BSPTree_draft3.exe

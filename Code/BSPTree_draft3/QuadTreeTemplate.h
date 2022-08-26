@@ -18,6 +18,7 @@ struct QTOperationBorder {
 	double max_y = 0;
 };
 
+//the following function is used for debuging and is not necessarry for the operation of the datastruct
 void printQTLocation(QTLocation payload, QTLocation node) {	 //for debgging
 	std::cout << "Payload at (" << payload.x << "|" << payload.y << ")" << std::endl;
 	std::cout << "Node at (" << node.x << "|" << node.y << ")" << std::endl;
@@ -112,6 +113,7 @@ FPackage<QTLocation, QTLocation, QTOperationBorder> getQTFPackage() {
 	return QTFPackage;
 }
 
+//not part of the interface but helpful for creating th root node
 QTLocation getQTNodeLocation(QTOperationBorder border) {
 	double dx = border.max_x - border.min_x;
 	double dy = border.max_y - border.min_y;
